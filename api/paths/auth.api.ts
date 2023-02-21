@@ -65,3 +65,15 @@ export const authLogout = gql`
         success: authLogout(refreshToken: $refreshToken)
     }
 `;
+
+export const authResetPassword = gql`
+    mutation authResetPassword($userId: ID!, $resetToken: String!, $password: String!) {
+        authResetPassword(userId: $userId, resetToken: $resetToken, password: $password)
+    }
+`;
+
+export const authRequestPasswordReset = gql`
+    mutation authRequestPasswordReset($email: String!) {
+        success: authRequestPasswordReset(email: $email)
+    }
+`;

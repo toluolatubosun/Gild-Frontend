@@ -2,13 +2,12 @@ import React from "react";
 import Head from "next/head";
 import { toast } from "react-toastify";
 import { useRouter } from "next/router";
-import { useMutation } from "@tanstack/react-query";
 
-import { CardLayout, InputField } from "../../components";
 import { authResetPassword } from "../../api";
+import { CardLayout, InputField } from "../../components";
+import { handleGraphQLError, useGQLMutation } from "../../utils";
 
 import type { NextPage } from "next";
-import type { AxiosError, AxiosResponse } from "axios";
 
 const PasswordReset: NextPage = () => {
     const router = useRouter();
@@ -27,15 +26,13 @@ const PasswordReset: NextPage = () => {
             return;
         }
 
-        toast.loading("Loading... Please wait", {
-            autoClose: false
-        });
+        toast.loading("Loading... Please wait", { autoClose: false });
 
         mutate({ userId, resetToken, password: formData.password });
     };
 
-    const { mutate, isLoading } = useMutation(authResetPassword, {
-        onSuccess: (response: AxiosResponse) => {
+    const { mutate, isLoading } = useGQLMutation(authResetPassword, {
+        onSuccess: (response: any) => {
             toast.dismiss();
             toast.success("Password Updated Successfully");
 
@@ -46,9 +43,8 @@ const PasswordReset: NextPage = () => {
                 confirmPassword: ""
             });
         },
-        onError: (error: AxiosError) => {
-            toast.dismiss();
-            toast.error(error.response ? error.response.data.message : error.message);
+        onError: (error: GraphQLErrorResponse) => {
+            handleGraphQLError(error);
         }
     });
 

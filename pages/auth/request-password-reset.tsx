@@ -1,44 +1,36 @@
 import React from "react";
 import { toast } from "react-toastify";
 import { useRouter } from "next/router";
-import { useMutation } from "@tanstack/react-query";
 
-import { CardLayout, InputField } from "../../components";
 import { authRequestPasswordReset } from "../../api";
+import { CardLayout, InputField } from "../../components";
+import { handleGraphQLError, useGQLMutation } from "../../utils";
 
 import type { NextPage } from "next";
-import type { AxiosError, AxiosResponse } from "axios";
 
 const RequestPasswordReset: NextPage = () => {
     const router = useRouter();
     const { email }: any = router.query;
 
-    const [formData, setFormData] = React.useState({
-        email: email || ""
-    });
+    const [formData, setFormData] = React.useState({ email: email || "" });
 
     const HandleSubmit = (e: any) => {
         e.preventDefault();
 
-        toast.loading("Loading... Please wait", {
-            autoClose: false
-        });
+        toast.loading("Loading... Please wait", { autoClose: false });
 
-        mutate(formData.email);
+        mutate(formData);
     };
 
-    const { mutate, isLoading } = useMutation(authRequestPasswordReset, {
-        onSuccess: (response: AxiosResponse) => {
+    const { mutate, isLoading } = useGQLMutation(authRequestPasswordReset, {
+        onSuccess: (response: any) => {
             toast.dismiss();
             toast.success("Mail Sent Successfully");
 
-            setFormData({
-                email: ""
-            });
+            setFormData({ email: "" });
         },
-        onError: (error: AxiosError) => {
-            toast.dismiss();
-            toast.error(error.response ? error.response.data.message : error.message);
+        onError: (error: GraphQLErrorResponse) => {
+            handleGraphQLError(error);
         }
     });
 
