@@ -56,7 +56,7 @@ const PasswordReset: NextPage = () => {
     return (
         <>
             <Head>
-                <title>Reset Password | MySVote</title>
+                <title>Reset Password | Gild</title>
             </Head>
 
             <CardLayout>

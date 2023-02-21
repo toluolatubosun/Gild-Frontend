@@ -1,5 +1,6 @@
 import React from "react";
 import Head from "next/head";
+import Link from "next/link";
 import { useRouter } from "next/router";
 
 import { authVerifyEmail } from "../../api";
@@ -7,7 +8,6 @@ import { useGQLMutation } from "../../utils";
 import { CardLayout } from "../../components";
 
 import type { NextPage } from "next";
-import Link from "next/link";
 
 const EmailVerification: NextPage = () => {
     const router = useRouter();

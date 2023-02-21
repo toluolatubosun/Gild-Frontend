@@ -1,4 +1,5 @@
 import React from "react";
+import Head from "next/head";
 import { useRouter } from "next/router";
 
 import { CardLayout } from "../../components";
@@ -11,6 +12,10 @@ const OnBoarding: NextPage = () => {
 
     return (
         <>
+            <Head>
+                <title>On-boarding | Gild</title>
+            </Head>
+
             <CardLayout large={true}>
                 <h1 className="font-Sora font-bold text-2xl md:text-3xl text-center text-gray-800 mb-4">Welcome to Gild</h1>
                 <div className="text-lg text-gray-700 text-center">

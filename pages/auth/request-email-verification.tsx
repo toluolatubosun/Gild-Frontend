@@ -1,12 +1,13 @@
 import React from "react";
+import Head from "next/head";
 import { toast } from "react-toastify";
 import { useRouter } from "next/router";
 
 import { authRequestEmailVerification } from "../../api";
 import { CardLayout, InputField } from "../../components";
+import { handleGraphQLError, useGQLMutation } from "../../utils";
 
 import type { NextPage } from "next";
-import { handleGraphQLError, useGQLMutation } from "../../utils";
 
 const RequestEmailVerification: NextPage = () => {
     const router = useRouter();
@@ -35,6 +36,10 @@ const RequestEmailVerification: NextPage = () => {
 
     return (
         <>
+            <Head>
+                <title>Request Email Verification | Gild</title>
+            </Head>
+
             <CardLayout>
                 <h1 className="font-Sora font-bold text-2xl text-center text-primary mb-4 tracking-wide">Request Email Verification</h1>
 

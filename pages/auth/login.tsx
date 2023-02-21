@@ -1,12 +1,13 @@
 import React from "react";
 import Link from "next/link";
+import Head from "next/head";
 import { toast } from "react-toastify";
 import { useRouter } from "next/router";
 import { setCookies } from "cookies-next";
 
 import { authLogin } from "../../api";
-import { handleGraphQLError, useGQLMutation, withoutAuth } from "../../utils";
 import { CardLayout, InputField } from "../../components";
+import { handleGraphQLError, useGQLMutation, withoutAuth } from "../../utils";
 
 import type { NextPage } from "next";
 
@@ -16,9 +17,7 @@ const Login: NextPage = () => {
     const HandleSubmit = (e: any) => {
         e.preventDefault();
 
-        toast.loading("Loading... Please wait", {
-            autoClose: false
-        });
+        toast.loading("Loading... Please wait", { autoClose: false });
 
         mutate({ input: formData });
     };
@@ -42,6 +41,10 @@ const Login: NextPage = () => {
 
     return (
         <>
+            <Head>
+                <title>Login | Gild</title>
+            </Head>
+
             <CardLayout>
                 <h1 className="font-Sora font-bold text-2xl text-center text-primary mb-4 tracking-wide">Login To Your Account</h1>
 

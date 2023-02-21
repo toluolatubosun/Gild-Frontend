@@ -1,4 +1,5 @@
 import React from "react";
+import Head from "next/head";
 import { toast } from "react-toastify";
 import { useRouter } from "next/router";
 import { useQueryClient } from "@tanstack/react-query";
@@ -43,7 +44,15 @@ const Logout: NextPage = () => {
         }
     }, [rendered]);
 
-    return <Loading isParent={true} />;
+    return (
+        <>
+            <Head>
+                <title>Logout | Gild</title>
+            </Head>
+
+            <Loading isParent={true} />
+        </>
+    );
 };
 
 export default withAuth(Logout);

@@ -1,4 +1,5 @@
 import React from "react";
+import Head from "next/head";
 import { toast } from "react-toastify";
 import { useRouter } from "next/router";
 
@@ -36,6 +37,10 @@ const RequestPasswordReset: NextPage = () => {
 
     return (
         <>
+            <Head>
+                <title>Request Password Reset | Gild</title>
+            </Head>
+
             <CardLayout>
                 <h1 className="font-Sora font-bold text-2xl text-center text-primary mb-4 tracking-wide">Request Password Reset</h1>
 

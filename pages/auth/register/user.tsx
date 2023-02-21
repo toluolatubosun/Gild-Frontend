@@ -1,5 +1,6 @@
 import React from "react";
 import Link from "next/link";
+import Head from "next/head";
 import { toast } from "react-toastify";
 import { useRouter } from "next/router";
 import { setCookies } from "cookies-next";
@@ -21,9 +22,7 @@ const SignUp: NextPage = () => {
             return;
         }
 
-        toast.loading("Loading... Please wait", {
-            autoClose: false
-        });
+        toast.loading("Loading... Please wait", { autoClose: false });
 
         const { name, email, role, username, password } = formData;
         mutate({ input: { name, email, role, username, password } });
@@ -55,6 +54,10 @@ const SignUp: NextPage = () => {
 
     return (
         <>
+            <Head>
+                <title>Register a Personal Account | Gild</title>
+            </Head>
+
             <CardLayout large>
                 <h1 className="font-Sora font-bold text-2xl text-center text-primary mb-4 tracking-wide">Create An Account</h1>
 
