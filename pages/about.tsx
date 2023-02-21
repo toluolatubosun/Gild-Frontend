@@ -6,7 +6,7 @@ import { Loading } from "../components";
 const Home: NextPage = () => {
     return (
         <>
-            <h1 className="text-5xl text-center underline">Home Page</h1>
+            <h1 className="text-5xl text-center underline">About</h1>
 
             <Loading isParent={false} />
         </>
