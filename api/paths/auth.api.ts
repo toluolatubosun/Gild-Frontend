@@ -42,6 +42,18 @@ export const authLogin = gql`
     }
 `;
 
+export const authVerifyEmail = gql`
+    mutation authVerifyEmail($userId: ID!, $verifyToken: String!) {
+        success: authVerifyEmail(userId: $userId, verifyToken: $verifyToken)
+    }
+`;
+
+export const authRequestEmailVerification = gql`
+    mutation authRequestEmailVerification($email: String!) {
+        success: authRequestEmailVerification(email: $email)
+    }
+`;
+
 export const authRefreshAccessToken = gql`
     mutation authRefreshAccessToken($refreshToken: String!) {
         accessToken: authRefreshAccessToken(refreshToken: $refreshToken)

@@ -14,8 +14,8 @@ function MyApp({ Component, pageProps }: AppProps) {
     return (
         <>
             <Head>
-                <title>nextjs-tailwind-graphql-starter</title>
-                <link rel="icon" href="/favicon.ico" />
+                <title>Gild</title>
+                <link rel="icon" href="/logo/favicon.ico" />
             </Head>
 
             <ToastContainer newestOnTop={true} pauseOnHover={false} autoClose={3000} />
