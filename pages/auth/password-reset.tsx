@@ -1,0 +1,103 @@
+import React from "react";
+import Head from "next/head";
+import { toast } from "react-toastify";
+import { useRouter } from "next/router";
+import { useMutation } from "@tanstack/react-query";
+
+import { CardLayout, InputField } from "../../components";
+import { authResetPassword } from "../../api";
+
+import type { NextPage } from "next";
+import type { AxiosError, AxiosResponse } from "axios";
+
+const PasswordReset: NextPage = () => {
+    const router = useRouter();
+    const { userId, resetToken } = router.query;
+
+    const HandleSubmit = (e: any) => {
+        e.preventDefault();
+
+        if (userId === null || resetToken === null) {
+            toast.warning("Invalid reset link");
+            return;
+        }
+
+        if (formData.password !== formData.confirmPassword) {
+            toast.warning("Passwords does not match");
+            return;
+        }
+
+        toast.loading("Loading... Please wait", {
+            autoClose: false
+        });
+
+        mutate({ userId, resetToken, password: formData.password });
+    };
+
+    const { mutate, isLoading } = useMutation(authResetPassword, {
+        onSuccess: (response: AxiosResponse) => {
+            toast.dismiss();
+            toast.success("Password Updated Successfully");
+
+            router.replace("/auth/login");
+
+            setFormData({
+                password: "",
+                confirmPassword: ""
+            });
+        },
+        onError: (error: AxiosError) => {
+            toast.dismiss();
+            toast.error(error.response ? error.response.data.message : error.message);
+        }
+    });
+
+    const [formData, setFormData] = React.useState({
+        password: "",
+        confirmPassword: ""
+    });
+
+    return (
+        <>
+            <Head>
+                <title>Reset Password | MySVote</title>
+            </Head>
+
+            <CardLayout>
+                <h1 className="font-Sora font-bold text-2xl text-center text-primary mb-4 tracking-wide">Reset your password</h1>
+
+                <form id="PasswordReset" className="mb-0 space-y-6" method="POST" onSubmit={HandleSubmit}>
+                    <InputField
+                        label="Password"
+                        value={formData.password}
+                        onChange={(e: React.ChangeEvent<HTMLInputElement>) => setFormData({ ...formData, password: e.target.value })}
+                        type="password"
+                        required={true}
+                        name="password"
+                    />
+
+                    <InputField
+                        label="Confirm Password"
+                        value={formData.confirmPassword}
+                        onChange={(e: React.ChangeEvent<HTMLInputElement>) => setFormData({ ...formData, confirmPassword: e.target.value })}
+                        type="password"
+                        required={true}
+                        name="confirmPassword"
+                    />
+
+                    <div>
+                        <button
+                            disabled={isLoading}
+                            type="submit"
+                            className="w-full flex justify-center py-4 px-4 rounded shadow-sm text-md font-semibold text-white bg-primary hover:bg-secondary mt-2 disabled:bg-gray-300 disabled:cursor-not-allowed"
+                        >
+                            Reset Password
+                        </button>
+                    </div>
+                </form>
+            </CardLayout>
+        </>
+    );
+};
+
+export default PasswordReset;

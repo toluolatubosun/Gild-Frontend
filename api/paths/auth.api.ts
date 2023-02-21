@@ -2,9 +2,22 @@ import gql from "graphql-tag";
 
 export const authRegister = gql`
     mutation authRegister($input: RegisterInput!) {
-        authRegister(input: $input) {
+        response: authRegister(input: $input) {
             user {
-                name
+                email
+            }
+            token {
+                accessToken
+                refreshToken
+            }
+        }
+    }
+`;
+
+export const authRegisterBusiness = gql`
+    mutation authRegister($input: RegisterInput!, $businessData: BusinessDataInput) {
+        response: authRegister(input: $input, businessData: $businessData) {
+            user {
                 email
             }
             token {
@@ -17,9 +30,8 @@ export const authRegister = gql`
 
 export const authLogin = gql`
     mutation authLogin($input: LoginInput!) {
-        authLogin(input: $input) {
+        response: authLogin(input: $input) {
             user {
-                name
                 email
             }
             token {
@@ -33,5 +45,11 @@ export const authLogin = gql`
 export const authRefreshAccessToken = gql`
     mutation authRefreshAccessToken($refreshToken: String!) {
         accessToken: authRefreshAccessToken(refreshToken: $refreshToken)
+    }
+`;
+
+export const authLogout = gql`
+    mutation authLogout($refreshToken: String!) {
+        success: authLogout(refreshToken: $refreshToken)
     }
 `;

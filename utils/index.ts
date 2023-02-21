@@ -6,3 +6,6 @@ export { default as withoutAuth } from "./without-auth";
 export { default as useUser } from "./use-user";
 export { default as useGQLQuery } from "./use-gql-query";
 export { default as useGQLMutation } from "./use-gql-mutation";
+
+// Helper functions
+export { default as handleGraphQLError } from "./handle-graphql-error";

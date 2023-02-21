@@ -2,7 +2,7 @@
 const nextConfig = {
     reactStrictMode: true,
     env: {
-        BACKEND_BASE_URL: process.env.BACKEND_BASE_URL || "http://localhost:8000/graphql"
+        BACKEND_BASE_URL: process.env.BACKEND_BASE_URL || "http://localhost:8080/graphql"
     }
 };
 
