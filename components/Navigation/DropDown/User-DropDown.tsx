@@ -2,8 +2,6 @@ import React from "react";
 import Link from "next/link";
 import { createPopper } from "@popperjs/core";
 
-import { useUser } from "../../../utils";
-
 interface Props {
     image: string;
 }
@@ -43,12 +41,6 @@ const UserDropDown = ({ image }: Props) => {
             </button>
 
             <div ref={popoverDropdownRef} className={(dropdownPopoverShow ? "block " : "hidden ") + "bg-white text-base z-50 float-left py-2 list-none text-left rounded shadow-lg min-w-48"}>
-                <Link href="/app/loan" passHref>
-                    <button className="text-sm py-2 px-4 font-normal block w-full whitespace-nowrap bg-transparent text-blueGray-700">Loan</button>
-                </Link>
-
-                <div className="h-0 my-2 border border-solid border-blueGray-100" />
-
                 <Link href="/app/user" passHref>
                     <button className="text-sm py-2 px-4 font-normal block w-full whitespace-nowrap bg-transparent text-blueGray-700">Profile</button>
                 </Link>
