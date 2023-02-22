@@ -84,11 +84,7 @@ const Login: NextPage = () => {
                     </button>
 
                     <div>
-                        <button
-                            disabled={isLoading}
-                            type="submit"
-                            className="w-full flex justify-center py-4 px-4 rounded shadow-sm text-md font-bold text-white bg-primary hover:bg-secondary mt-2 disabled:bg-gray-300 disabled:cursor-not-allowed"
-                        >
+                        <button type="submit" disabled={isLoading} className="btn-auth-form">
                             Login
                         </button>
                     </div>

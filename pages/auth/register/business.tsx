@@ -8,7 +8,7 @@ import { Country, State, City } from "country-state-city";
 
 import { authRegisterBusiness } from "../../../api";
 import { CardLayout, InputField, SelectField } from "../../../components";
-import { handleGraphQLError, useGQLMutation, withoutAuth } from "../../../utils";
+import { companySizeData, handleGraphQLError, industryData, useGQLMutation, withoutAuth } from "../../../utils";
 
 import type { NextPage } from "next";
 
@@ -178,23 +178,7 @@ const SignUp: NextPage = () => {
                             onChange={(e: React.ChangeEvent<HTMLSelectElement>) => setFormData({ ...formData, industry: e.target.value })}
                             name="industry"
                             required={true}
-                            options={[
-                                { label: "Health", value: "Health" },
-                                { label: "Energy", value: "Energy" },
-                                { label: "Retail", value: "Retail" },
-                                { label: "Finance", value: "Finance" },
-                                { label: "Education", value: "Education" },
-                                { label: "Technology", value: "Technology" },
-                                { label: "Real Estate", value: "Real Estate" },
-                                { label: "Agriculture", value: "Agriculture" },
-                                { label: "Hospitality", value: "Hospitality" },
-                                { label: "Construction", value: "Construction" },
-                                { label: "Entertainment", value: "Entertainment" },
-                                { label: "Manufacturing", value: "Manufacturing" },
-                                { label: "Transportation", value: "Transportation" },
-                                { label: "Telecommunication", value: "Telecommunication" },
-                                { label: "Others", value: "Others" }
-                            ]}
+                            options={industryData}
                         />
 
                         <SelectField
@@ -203,12 +187,7 @@ const SignUp: NextPage = () => {
                             onChange={(e: React.ChangeEvent<HTMLSelectElement>) => setFormData({ ...formData, companySize: e.target.value })}
                             name="companySize"
                             required={true}
-                            options={[
-                                { label: "1-50", value: "1-50" },
-                                { label: "51-100", value: "51-100" },
-                                { label: "101-500", value: "101-500" },
-                                { label: "500+", value: "500+" }
-                            ]}
+                            options={companySizeData}
                         />
                     </div>
 
@@ -239,12 +218,8 @@ const SignUp: NextPage = () => {
                     </p>
 
                     <div>
-                        <button
-                            disabled={isLoading}
-                            type="submit"
-                            className="w-full flex justify-center py-4 px-4 rounded shadow-sm text-md font-semibold text-white bg-primary hover:bg-primary mt-2 disabled:bg-gray-300 disabled:cursor-not-allowed"
-                        >
-                            SignUp
+                        <button disabled={isLoading} type="submit" className="btn-auth-form">
+                            Register
                         </button>
                     </div>
                 </form>

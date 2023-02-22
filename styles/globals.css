@@ -8,3 +8,14 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+@layer components {
+    /* Your custom components */
+    .btn-auth-form {
+        @apply font-Sora w-full flex justify-center py-4 px-4 rounded shadow-sm font-bold text-white bg-secondary hover:bg-primary mt-2 disabled:bg-gray-300 disabled:cursor-not-allowed;
+    }
+
+    .btn-profile-setting {
+        @apply font-Sora rounded-sm px-5 py-3 text-base font-medium text-center text-white bg-secondary hover:bg-primary disabled:bg-gray-300 disabled:cursor-not-allowed;
+    }
+}

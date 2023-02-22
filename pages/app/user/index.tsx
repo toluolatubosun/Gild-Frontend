@@ -1,11 +1,12 @@
 import React from "react";
 import Head from "next/head";
 import { toast } from "react-toastify";
-import { useMutation, useQueryClient } from "@tanstack/react-query";
+import { useQueryClient } from "@tanstack/react-query";
+import { Country, State, City } from "country-state-city";
 
-import { InputField, SideNavLayout } from "../../../components";
-import { handleGraphQLError, toBase64, useGQLMutation, useGQLQuery, withAuth } from "../../../utils";
-import { authUpdatePassword, userUpdateMe, userGetMyProfile } from "../../../api";
+import { InputField, SelectField, SideNavLayout } from "../../../components";
+import { authUpdatePassword, userUpdateMe, userGetMyProfile, businessUpdateMine } from "../../../api";
+import { handleGraphQLError, toBase64, useGQLMutation, useGQLQuery, withAuth, industryData, companySizeData } from "../../../utils";
 
 import type { NextPage } from "next";
 
@@ -63,6 +64,66 @@ const UserProfile: NextPage = () => {
         }
     });
 
+    /// ===== BUSINESS DATA ===== ///
+
+    React.useEffect(() => {
+        if (user && user.business) {
+            const country = Country.getAllCountries().find((country) => country.name === user.business.country);
+            const state = State.getStatesOfCountry(country?.isoCode).find((state) => state.name === user.business.state);
+            const city = City.getCitiesOfState(country?.isoCode || "", state?.isoCode || "").find((city) => city.name === user.business.city);
+
+            setBusinessFormData({
+                country: {
+                    name: country?.name || "",
+                    code: country?.isoCode || ""
+                },
+                state: {
+                    code: state?.isoCode || "N/A",
+                    name: state?.name || "No State Available"
+                },
+                city: city?.name || "No City Available",
+                industry: user.business.industry,
+                companySize: user.business.companySize
+            });
+        }
+    }, [user]);
+
+    const [businessFormData, setBusinessFormData] = React.useState({
+        country: {
+            name: "",
+            code: ""
+        },
+        state: {
+            name: "",
+            code: ""
+        },
+        city: "",
+        industry: "",
+        companySize: ""
+    });
+
+    const BusinessDataFormSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+        e.preventDefault();
+
+        const { city, state, country, companySize, industry } = businessFormData;
+        updateBusinessData({ businessData: { city, state: state.name, country: country.name, companySize, industry } });
+    };
+
+    const { mutate: updateBusinessData, isLoading: updatingBusinessData } = useGQLMutation(businessUpdateMine, {
+        onMutate: () => {
+            toast.loading("Loading... Please wait", { autoClose: false });
+        },
+        onSuccess: async () => {
+            toast.dismiss();
+            toast.success("Profile updated successfully");
+
+            await queryClient.refetchQueries(["my-profile"], { exact: true });
+        },
+        onError: (error: GraphQLErrorResponse) => {
+            handleGraphQLError(error);
+        }
+    });
+
     /// ===== UPDATE PASSWORD ===== ///
 
     const [passwordFormData, setPasswordFormData] = React.useState({
@@ -97,6 +158,10 @@ const UserProfile: NextPage = () => {
 
     return (
         <>
+            <Head>
+                <title>Profile | Gild</title>
+            </Head>
+
             <SideNavLayout isLoading={isLoading}>
                 {user && (
                     <form className="mb-10 space-y-6 mt-10" onSubmit={BioDataFormSubmit}>
@@ -117,7 +182,10 @@ const UserProfile: NextPage = () => {
 
                                 <div className="items-start flex flex-row w-full md:items-start mt-4 space-x-2">
                                     <label
-                                        className={`rounded-sm text-center text-base text-white p-2 font-medium` + (updatingBioData ? " bg-gray-300 cursor-not-allowed" : " bg-primary cursor-pointer")}
+                                        className={
+                                            `font-Sora rounded-sm px-5 py-3 text-base font-medium text-center text-white` +
+                                            (updatingBioData ? " bg-gray-300 cursor-not-allowed" : " bg-secondary hover:bg-primary cursor-pointer")
+                                        }
                                         htmlFor="image"
                                     >
                                         Upload Image
@@ -136,12 +204,7 @@ const UserProfile: NextPage = () => {
                                         }}
                                     />
 
-                                    <button
-                                        disabled={updatingBioData}
-                                        onClick={() => setBioFormData({ ...bioFormData, image: null })}
-                                        type="button"
-                                        className="rounded-sm text-gray-700 text-center border-2 border-primary bg-white p-1.5 text-base disabled:bg-gray-300 disabled:border-gray-300 disabled:cursor-not-allowed"
-                                    >
+                                    <button disabled={updatingBioData} onClick={() => setBioFormData({ ...bioFormData, image: null })} type="button" className="btn-profile-setting">
                                         Delete Image
                                     </button>
                                 </div>
@@ -163,12 +226,108 @@ const UserProfile: NextPage = () => {
                         </div>
 
                         <div className="flex flex-col items-center md:items-end">
-                            <button
-                                disabled={updatingBioData}
-                                type="submit"
-                                className="font-Sora rounded-sm px-5 py-3 text-base font-medium text-center text-white bg-secondary hover:bg-primary disabled:bg-gray-300 disabled:cursor-not-allowed"
-                            >
+                            <button disabled={updatingBioData} type="submit" className="btn-profile-setting">
                                 Save Change
+                            </button>
+                        </div>
+                    </form>
+                )}
+
+                {user && user.role === "business" && (
+                    <form className="mb-10 space-y-6 mt-10" onSubmit={BusinessDataFormSubmit}>
+                        <h3 className="font-Sora text-gray-700 mb-6 text-2xl font-semibold text-left">Business Information</h3>
+
+                        <div className="md:flex md:space-x-4 space-y-6 md:space-y-0">
+                            <SelectField
+                                label="Industry"
+                                value={businessFormData.industry}
+                                onChange={(e: React.ChangeEvent<HTMLSelectElement>) => setBusinessFormData({ ...businessFormData, industry: e.target.value })}
+                                name="industry"
+                                required={true}
+                                options={industryData}
+                            />
+
+                            <SelectField
+                                label="Company Size"
+                                value={businessFormData.companySize}
+                                onChange={(e: React.ChangeEvent<HTMLSelectElement>) => setBusinessFormData({ ...businessFormData, companySize: e.target.value })}
+                                name="companySize"
+                                required={true}
+                                options={companySizeData}
+                            />
+                        </div>
+
+                        <SelectField
+                            label="Country"
+                            value={businessFormData.country.code}
+                            onChange={(e: React.ChangeEvent<HTMLSelectElement>) =>
+                                setBusinessFormData({
+                                    ...businessFormData,
+                                    city: "",
+                                    state: { name: "", code: "" },
+                                    country: {
+                                        name: Country.getCountryByCode(e.target.value)?.name ?? "",
+                                        code: e.target.value
+                                    }
+                                })
+                            }
+                            name="country"
+                            required={true}
+                            options={Country.getAllCountries().map((country) => {
+                                return {
+                                    label: country.name,
+                                    value: country.isoCode
+                                };
+                            })}
+                        />
+
+                        <div className="md:flex md:space-x-4 space-y-6 md:space-y-0">
+                            <SelectField
+                                label="State"
+                                value={businessFormData.state.code}
+                                onChange={(e: React.ChangeEvent<HTMLSelectElement>) =>
+                                    setBusinessFormData({
+                                        ...businessFormData,
+                                        city: "",
+                                        state: { name: State.getStateByCodeAndCountry(e.target.value, businessFormData.country.code)?.name || "", code: e.target.value }
+                                    })
+                                }
+                                name="state"
+                                required={true}
+                                options={
+                                    State.getStatesOfCountry(businessFormData.country.code).length === 0
+                                        ? [{ label: "No State Available", value: "N/A" }]
+                                        : State.getStatesOfCountry(businessFormData.country.code).map((state) => {
+                                              return {
+                                                  label: state.name,
+                                                  value: state.isoCode
+                                              };
+                                          })
+                                }
+                            />
+
+                            <SelectField
+                                label="City"
+                                value={businessFormData.city}
+                                onChange={(e: React.ChangeEvent<HTMLSelectElement>) => setBusinessFormData({ ...businessFormData, city: e.target.value })}
+                                name="city"
+                                required={true}
+                                options={
+                                    City.getCitiesOfState(businessFormData.country.code, businessFormData.state.code).length === 0
+                                        ? [{ label: "No City Available", value: "N/A" }]
+                                        : City.getCitiesOfState(businessFormData.country.code, businessFormData.state.code).map((city) => {
+                                              return {
+                                                  label: city.name,
+                                                  value: city.name
+                                              };
+                                          })
+                                }
+                            />
+                        </div>
+
+                        <div className="flex flex-col items-center md:items-end">
+                            <button disabled={updatingBusinessData} type="submit" className="btn-profile-setting">
+                                Update Information
                             </button>
                         </div>
                     </form>
@@ -207,11 +366,7 @@ const UserProfile: NextPage = () => {
                     </div>
 
                     <div className="flex flex-col items-center md:items-end">
-                        <button
-                            disabled={updatingPassword}
-                            type="submit"
-                            className="font-Sora rounded-sm px-5 py-3 text-base font-medium text-center text-white bg-secondary hover:bg-primary disabled:bg-gray-300 disabled:cursor-not-allowed"
-                        >
+                        <button disabled={updatingPassword} type="submit" className="btn-profile-setting">
                             Update Password
                         </button>
                     </div>

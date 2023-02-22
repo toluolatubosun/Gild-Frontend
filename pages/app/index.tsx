@@ -1,7 +1,7 @@
 import React from "react";
+import Head from "next/head";
 import Link from "next/link";
 import { GiTakeMyMoney } from "react-icons/gi";
-import { FaEye, FaEyeSlash } from "react-icons/fa";
 
 import { walletGetMine } from "../../api";
 import { SideNavLayout } from "../../components";
@@ -36,6 +36,10 @@ const Dashboard: NextPage = () => {
 
     return (
         <>
+            <Head>
+                <title>Dashboard | Gild</title>
+            </Head>
+
             <SideNavLayout>
                 <div className="my-5">
                     <h1 className="font-Sora font-bold text-3xl">

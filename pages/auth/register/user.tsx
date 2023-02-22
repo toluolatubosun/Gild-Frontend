@@ -116,12 +116,8 @@ const SignUp: NextPage = () => {
                     </p>
 
                     <div>
-                        <button
-                            disabled={isLoading}
-                            type="submit"
-                            className="w-full flex justify-center py-4 px-4 rounded shadow-sm text-md font-semibold text-white bg-primary hover:bg-primary mt-2 disabled:bg-gray-300 disabled:cursor-not-allowed"
-                        >
-                            SignUp
+                        <button disabled={isLoading} type="submit" className="btn-auth-form">
+                            Register
                         </button>
                     </div>
                 </form>
