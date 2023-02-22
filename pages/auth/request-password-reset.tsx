@@ -42,7 +42,7 @@ const RequestPasswordReset: NextPage = () => {
             </Head>
 
             <CardLayout>
-                <h1 className="font-Sora font-bold text-2xl text-center text-primary mb-4 tracking-wide">Request Password Reset</h1>
+                <h1 className="font-Sora font-bold text-2xl text-center text-secondary mb-4 tracking-wide">Request Password Reset</h1>
 
                 <form id="RequestPasswordReset" className="mb-0 space-y-6" method="POST" onSubmit={HandleSubmit}>
                     <InputField

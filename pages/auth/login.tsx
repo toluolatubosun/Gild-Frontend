@@ -24,6 +24,8 @@ const Login: NextPage = () => {
 
     const { mutate, isLoading } = useGQLMutation(authLogin, {
         onSuccess: ({ response }: any) => {
+            toast.dismiss();
+
             setCookies("access_token", response.token.accessToken);
             setCookies("refresh_token", response.token.refreshToken);
 
@@ -46,7 +48,7 @@ const Login: NextPage = () => {
             </Head>
 
             <CardLayout>
-                <h1 className="font-Sora font-bold text-2xl text-center text-primary mb-4 tracking-wide">Login To Your Account</h1>
+                <h1 className="font-Sora font-bold text-2xl text-center text-secondary mb-4 tracking-wide">Login To Your Account</h1>
 
                 <form id="loginForm" className="mb-0 space-y-6" method="POST" onSubmit={HandleSubmit}>
                     <InputField

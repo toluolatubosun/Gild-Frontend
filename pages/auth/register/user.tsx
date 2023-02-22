@@ -59,7 +59,7 @@ const SignUp: NextPage = () => {
             </Head>
 
             <CardLayout large>
-                <h1 className="font-Sora font-bold text-2xl text-center text-primary mb-4 tracking-wide">Create An Account</h1>
+                <h1 className="font-Sora font-bold text-2xl text-center text-secondary mb-4 tracking-wide">Create An Account</h1>
 
                 <form id="SingUpForm" className="mb-0 space-y-6" method="POST" onSubmit={HandleSubmit}>
                     <InputField

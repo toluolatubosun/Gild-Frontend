@@ -41,7 +41,7 @@ const RequestEmailVerification: NextPage = () => {
             </Head>
 
             <CardLayout>
-                <h1 className="font-Sora font-bold text-2xl text-center text-primary mb-4 tracking-wide">Request Email Verification</h1>
+                <h1 className="font-Sora font-bold text-2xl text-center text-secondary mb-4 tracking-wide">Request Email Verification</h1>
 
                 <form id="RequestEmailVerification" className="mb-0 space-y-6" method="POST" onSubmit={HandleSubmit}>
                     <InputField

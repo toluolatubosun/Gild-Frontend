@@ -8,7 +8,7 @@ const withoutAuth = (WrappedComponent: React.FC) => {
         const hasAccessToken = hasCookie("access_token");
 
         if (hasAccessToken) {
-            router.replace("/dashboard");
+            router.replace("/app");
             return <></>;
         }
 

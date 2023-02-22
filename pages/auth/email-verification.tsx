@@ -53,7 +53,7 @@ const EmailVerification: NextPage = () => {
             </Head>
 
             <CardLayout>
-                <h1 className="font-Sora font-bold text-2xl md:text-3xl text-center mb-4">Email verification</h1>
+                <h1 className="font-Sora font-bold text-2xl md:text-3xl text-center text-secondary mb-4">Email verification</h1>
                 <p className={`text-xl font-semibold ${helpTextColor} text-center`}>{helpText}</p>
 
                 <p className="text-center text font-medium mt-4 text-gray-600">

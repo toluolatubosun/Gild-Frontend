@@ -1,4 +1,5 @@
 import React from "react";
+import { toast } from "react-toastify";
 import { useRouter } from "next/router";
 import { hasCookie } from "cookies-next";
 
@@ -17,8 +18,7 @@ const withAuth = (WrappedComponent: React.FC) => {
 
         React.useEffect(() => {
             if (!hasAccessToken) {
-                // If auth token is not in cookie, redirect to login page
-                router.push("/");
+                router.push("/auth/login");
             }
         }, []);
 
@@ -27,8 +27,10 @@ const withAuth = (WrappedComponent: React.FC) => {
             ["auth-user"],
             { query: userGetMe, variables: {} },
             {
-                onError: (error: any) => {
-                    const message = error.response ? error.response.errors[0].message : error.message;
+                onError: (error: GraphQLErrorResponse) => {
+                    const message = error.response ? error.response.errors[0].message : "An error occurred";
+                    toast.error(message);
+
                     // Handle invalid auth token error and redirect somewhere
                     router.push("/");
                 },

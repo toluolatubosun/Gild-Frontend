@@ -17,7 +17,7 @@ const OnBoarding: NextPage = () => {
             </Head>
 
             <CardLayout large={true}>
-                <h1 className="font-Sora font-bold text-2xl md:text-3xl text-center text-gray-800 mb-4">Welcome to Gild</h1>
+                <h1 className="font-Sora font-bold text-2xl md:text-3xl text-center text-secondary mb-4">Welcome to Gild</h1>
                 <div className="text-lg text-gray-700 text-center">
                     <p className="mb-2 font-medium">Check your email for a verification link</p>
                     <p>

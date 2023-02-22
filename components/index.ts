@@ -6,3 +6,4 @@ export { default as TextAreaField } from "./Input/Text-Area-Field";
 export { default as FileUploadField } from "./Input/File-Upload-Field";
 
 export { default as CardLayout } from "./Layout/Card-Layout";
+export { default as SideNavLayout } from "./Layout/Side-Nav-Layout";
