@@ -77,3 +77,9 @@ export const authRequestPasswordReset = gql`
         success: authRequestPasswordReset(email: $email)
     }
 `;
+
+export const authUpdatePassword = gql`
+    mutation authUpdatePassword($oldPassword: String!, $newPassword: String!) {
+        success: authUpdatePassword(oldPassword: $oldPassword, newPassword: $newPassword)
+    }
+`;

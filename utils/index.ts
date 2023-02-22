@@ -8,4 +8,5 @@ export { default as useGQLQuery } from "./use-gql-query";
 export { default as useGQLMutation } from "./use-gql-mutation";
 
 // Helper functions
+export { default as toBase64 } from "./to-base64";
 export { default as handleGraphQLError } from "./handle-graphql-error";
