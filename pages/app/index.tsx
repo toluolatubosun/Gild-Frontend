@@ -1,6 +1,8 @@
 import React from "react";
 import Head from "next/head";
 import Link from "next/link";
+import { AiOutlineBank } from "react-icons/ai";
+import { HiOutlineBanknotes } from "react-icons/hi2";
 import { GiTakeMyMoney } from "react-icons/gi";
 
 import { walletGetMine } from "../../api";
@@ -16,8 +18,8 @@ const Dashboard: NextPage = () => {
     const [wallet, setWallet] = React.useState<{ balance: number } | null>(null);
 
     const quickActions = [
-        { name: "Deposit", icon: "GiTakeMyMoney", link: "/app/deposit" },
-        { name: "Withdraw", icon: "GiTakeMyMoney", link: "/app/withdraw" },
+        { name: "Deposit", icon: "HiOutlineBanknotes", link: "/app/deposit" },
+        { name: "Withdraw", icon: "AiOutlineBank", link: "/app/withdraw" },
         { name: "Transfer", icon: "GiTakeMyMoney", link: "/app/transfer" }
     ];
 
@@ -68,7 +70,11 @@ const Dashboard: NextPage = () => {
                         <Link key={index} href={action.link}>
                             <div className="cursor-pointer border-4 border-secondary rounded-md py-3 hover:bg-secondary hover:text-white">
                                 <div className="flex flex-row items-center justify-center">
-                                    <div className="bg-primary rounded-full p-4">{action.icon === "GiTakeMyMoney" && <GiTakeMyMoney className="text-3xl text-white" />}</div>
+                                    <div className="bg-primary rounded-full p-4">
+                                        {action.icon === "HiOutlineBanknotes" && <HiOutlineBanknotes className="text-3xl text-secondary" />}
+                                        {action.icon === "AiOutlineBank" && <AiOutlineBank className="text-3xl text-secondary" />}
+                                        {action.icon === "GiTakeMyMoney" && <GiTakeMyMoney className="text-3xl text-secondary" />}
+                                    </div>
                                     <h1 className="font-Sora font-bold text-xl ml-10 lg:ml-5">{action.name}</h1>
                                 </div>
                             </div>
