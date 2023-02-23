@@ -73,7 +73,6 @@ const Deposit: NextPage = () => {
     };
 
     const [modalIsOpen, setIsOpen] = React.useState(false);
-
     const openModal = () => setIsOpen(true);
     const closeModal = () => setIsOpen(false);
 

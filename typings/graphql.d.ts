@@ -10,4 +10,5 @@ interface GraphQLErrorResponse {
         headers: any;
         status: number;
     };
+    message: string;
 }

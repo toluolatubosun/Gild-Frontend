@@ -9,5 +9,6 @@ export const HelloWord = gql`
 export * from "./paths/user.api";
 export * from "./paths/auth.api";
 export * from "./paths/wallet.api";
+export * from "./paths/stripe.api";
 export * from "./paths/business.api";
 export * from "./paths/currency.api";

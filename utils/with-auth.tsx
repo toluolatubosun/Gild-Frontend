@@ -28,7 +28,9 @@ const withAuth = (WrappedComponent: React.FC) => {
             { query: userGetMe, variables: {} },
             {
                 onError: (error: GraphQLErrorResponse) => {
-                    const message = error.response ? error.response.errors[0].message : "An error occurred";
+                    const message = error.response ? error.response.errors[0].message : error.message || "An error occurred";
+
+                    toast.dismiss();
                     toast.error(message);
 
                     // Handle invalid auth token error and redirect somewhere

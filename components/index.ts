@@ -8,4 +8,6 @@ export { default as FileUploadField } from "./Input/File-Upload-Field";
 export { default as CardLayout } from "./Layout/Card-Layout";
 export { default as SideNavLayout } from "./Layout/Side-Nav-Layout";
 
+export { default as CreditCard } from "./Stripe/Credit-Card";
+export { default as StripeAddCardForm } from "./Stripe/Add-Card-Form";
 export { default as StripeCheckoutForm } from "./Stripe/Checkout-Form";
