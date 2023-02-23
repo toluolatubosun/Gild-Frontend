@@ -28,6 +28,14 @@ export const userGetMyProfile = gql`
     }
 `;
 
+export const userGetMyStripeAccountStatus = gql`
+    query {
+        user: me {
+            stripeAccountStatus
+        }
+    }
+`;
+
 export const userUpdateMe = gql`
     mutation userUpdateMe($input: UserUpdateInput!) {
         user: userUpdateMe(input: $input) {

@@ -8,6 +8,7 @@ import { FaTimes, FaBars } from "react-icons/fa";
 import { HiOutlineBanknotes } from "react-icons/hi2";
 import { MdOutlineDashboard } from "react-icons/md";
 import { BiUser, BiLogOut, BiBriefcaseAlt, BiCreditCard } from "react-icons/bi";
+import { AiOutlineBank } from "react-icons/ai";
 
 import { useUser } from "../../utils";
 import UserDropDown from "./DropDown/User-DropDown";
@@ -105,6 +106,20 @@ const SideNav = () => {
                                     >
                                         <HiOutlineBanknotes />
                                         <p>Deposit</p>
+                                    </div>
+                                </Link>
+                            </li>
+
+                            <li className="items-center cursor-pointer">
+                                <Link passHref href="/app/withdraw">
+                                    <div
+                                        className={
+                                            "text-xl capitalize py-3 font-semibold tracking-wide flex flex-row space-x-2 items-center " +
+                                            (router.pathname == "/app/withdraw" ? "text-secondary" : "text-gray-900 hover:text-secondary")
+                                        }
+                                    >
+                                        <AiOutlineBank />
+                                        <p>Withdraw</p>
                                     </div>
                                 </Link>
                             </li>

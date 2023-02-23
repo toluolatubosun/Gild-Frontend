@@ -18,6 +18,18 @@ export const stripeDeleteMyCard = gql`
     }
 `;
 
+export const stripeSetupExpressAccount = gql`
+    mutation stripeSetupExpressAccount {
+        setupLink: stripeSetupExpressAccount
+    }
+`;
+
+export const stripeLoginToExpressAccount = gql`
+    mutation stripeLoginToExpressAccount {
+        loginLink: stripeLoginToExpressAccount
+    }
+`;
+
 export const stripeAttachCard = gql`
     mutation stripeAttachCard {
         clientSecret: stripeAttachCard

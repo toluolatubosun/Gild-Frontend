@@ -13,3 +13,15 @@ export const walletInitializeDeposit = gql`
         clientSecret: walletInitializeDeposit(amount: $amount, currencyCode: $currencyCode)
     }
 `;
+
+export const walletInitializeWithdrawal = gql`
+    mutation walletInitializeWithdrawal($amount: Int!) {
+        success: walletInitializeWithdrawal(amount: $amount)
+    }
+`;
+
+export const walletCompleteWithdrawal = gql`
+    mutation walletCompleteWithdrawal($amount: Int!, $OTP: String!) {
+        success: walletCompleteWithdrawal(amount: $amount, OTP: $OTP)
+    }
+`;
