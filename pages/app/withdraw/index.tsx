@@ -17,13 +17,13 @@ const Withdraw: NextPage = () => {
 
     const [showBalance, setShowBalance] = React.useState<boolean>(false);
     const [wallet, setWallet] = React.useState<{ balance: number } | null>(null);
-    const [stripeAccountStatus, setStripeAccountStatus] = React.useState<string | null>(null);
+    const [stripeAccountStatus, setStripeAccountStatus] = React.useState<string | null>()
 
     const [withdrawalOTP, setWithdrawalOTP] = React.useState<string>("");
     const [withdrawalAmount, setWithdrawalAmount] = React.useState<number>(0);
     const [submittedWithdrawal, setSubmittedWithdrawal] = React.useState<boolean>(false);
 
-    useGQLQuery(
+    const { isLoading: isLoadingWallet } = useGQLQuery(
         ["my-wallet"],
         { query: walletGetMine, variables: {} },
         {
@@ -36,7 +36,7 @@ const Withdraw: NextPage = () => {
         }
     );
 
-    useGQLQuery(
+    const { isLoading: isLoadingStripeAccount } = useGQLQuery(
         ["my-stripe-account-status"],
         { query: userGetMyStripeAccountStatus, variables: {} },
         {
@@ -137,7 +137,7 @@ const Withdraw: NextPage = () => {
                 <title>Deposit | Gild</title>
             </Head>
 
-            <SideNavLayout>
+            <SideNavLayout isLoading={isLoadingWallet || isLoadingStripeAccount}>
                 <div className="my-5">
                     <h1 className="font-Sora font-bold text-3xl">Withdraw</h1>
                 </div>
