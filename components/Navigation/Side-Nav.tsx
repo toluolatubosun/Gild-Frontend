@@ -125,6 +125,20 @@ const SideNav = () => {
                             </li>
 
                             <li className="items-center cursor-pointer">
+                                <Link passHref href="/app/transfer">
+                                    <div
+                                        className={
+                                            "text-xl capitalize py-3 font-semibold tracking-wide flex flex-row space-x-2 items-center " +
+                                            (router.pathname == "/app/transfer" ? "text-secondary" : "text-gray-900 hover:text-secondary")
+                                        }
+                                    >
+                                        <GiTakeMyMoney />
+                                        <p>Transfer</p>
+                                    </div>
+                                </Link>
+                            </li>
+
+                            <li className="items-center cursor-pointer">
                                 <Link passHref href="/app/cards">
                                     <div
                                         className={

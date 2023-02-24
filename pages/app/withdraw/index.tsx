@@ -1,23 +1,22 @@
 import React from "react";
 import Head from "next/head";
+import ReactModal from "react-modal";
+import { toast } from "react-toastify";
+import { MdClose } from "react-icons/md";
+import { useQueryClient } from "@tanstack/react-query";
 
 import { InputField, SideNavLayout } from "../../../components";
 import { handleGraphQLError, useGQLMutation, useGQLQuery, withAuth } from "../../../utils";
 import { stripeLoginToExpressAccount, stripeSetupExpressAccount, userGetMyStripeAccountStatus, walletCompleteWithdrawal, walletGetMine, walletInitializeWithdrawal } from "../../../api";
 
 import type { NextPage } from "next";
-import { toast } from "react-toastify";
-import { useRouter } from "next/router";
-import { MdClose } from "react-icons/md";
-import ReactModal from "react-modal";
-import { useQueryClient } from "@tanstack/react-query";
 
 const Withdraw: NextPage = () => {
     const queryClient = useQueryClient();
 
     const [showBalance, setShowBalance] = React.useState<boolean>(false);
     const [wallet, setWallet] = React.useState<{ balance: number } | null>(null);
-    const [stripeAccountStatus, setStripeAccountStatus] = React.useState<string | null>()
+    const [stripeAccountStatus, setStripeAccountStatus] = React.useState<string | null>(null);
 
     const [withdrawalOTP, setWithdrawalOTP] = React.useState<string>("");
     const [withdrawalAmount, setWithdrawalAmount] = React.useState<number>(0);
@@ -137,7 +136,7 @@ const Withdraw: NextPage = () => {
                 <title>Deposit | Gild</title>
             </Head>
 
-            <SideNavLayout isLoading={isLoadingWallet || isLoadingStripeAccount}>
+            <SideNavLayout isLoading={isLoadingWallet || isLoadingStripeAccount || stripeAccountStatus === null}>
                 <div className="my-5">
                     <h1 className="font-Sora font-bold text-3xl">Withdraw</h1>
                 </div>
