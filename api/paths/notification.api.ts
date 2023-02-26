@@ -11,6 +11,7 @@ export const notificationGetAllMine = gql`
                 source {
                     name
                     image
+                    username
                 }
             }
             pagination {

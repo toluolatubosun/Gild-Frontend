@@ -1,18 +1,21 @@
 import React from "react";
 import Head from "next/head";
+import { IoArrowBackOutline, IoArrowForwardOutline } from "react-icons/io5";
 
-import { handleGraphQLError, useGQLQuery, withAuth } from "../../../utils";
 import { SideNavLayout } from "../../../components";
+import { notificationGetAllMine } from "../../../api";
+import { handleGraphQLError, useGQLQuery, withAuth, moment } from "../../../utils";
 
 import type { NextPage } from "next";
-import { notificationGetAllMine } from "../../../api/paths/notification.api";
 
 const Activity: NextPage = () => {
     const [notifications, setNotifications] = React.useState<any[]>([]);
-    const [pagination, setPagination] = React.useState({ next: "", limit: 2 });
+    const [pagination, setPagination] = React.useState({ next: "", limit: 5 });
 
     const [cursors, setCursors] = React.useState<string[]>([""]);
-    const [cursorIndex, setCursorIndex] = React.useState<number>(-1);
+    const [cursorIndex, setCursorIndex] = React.useState<number>(0);
+
+    console.log(cursors, cursorIndex);
 
     const { isLoading } = useGQLQuery(
         ["my-notifications", pagination.next],
@@ -20,32 +23,31 @@ const Activity: NextPage = () => {
         {
             onSuccess: ({ data }) => {
                 setNotifications(data.notifications);
-                
+
                 if (data.pagination.hasNext && !cursors.includes(data.pagination.next)) {
                     setCursors((prev) => [...prev, data.pagination.next]);
-                    setCursorIndex((prev) => prev + 1);
                 }
             },
             onError: (error: GraphQLErrorResponse) => {
                 handleGraphQLError(error);
-            },
-            refetchOnMount: false,
-            refetchOnWindowFocus: false
+            }
         }
     );
 
+    const hasNext = () => cursorIndex !== cursors.length - 1;
     const nextPage = () => {
-        if (cursorIndex === cursors.length - 1) return;
+        if (!hasNext) return;
         setPagination({ ...pagination, next: cursors[cursorIndex + 1] });
         setCursorIndex((prev) => prev + 1);
     };
 
+    const hasPrevious = () => cursorIndex !== 0;
     const previousPage = () => {
-        if (cursorIndex === 0) return;
+        if (!hasPrevious) return;
         setPagination({ ...pagination, next: cursors[cursorIndex - 1] });
         setCursorIndex((prev) => prev - 1);
     };
-    
+
     return (
         <>
             <Head>
@@ -70,29 +72,45 @@ const Activity: NextPage = () => {
                         </div>
                     )}
                     {notifications.length > 0 && (
-                        <div>
+                        <div className="space-y-5">
                             {notifications.map((notification) => (
-                                <div key={notification.id}>
-                                    <p>{notification.source.name}</p>
-                                    <p>{notification.createdAt}</p>
-                                    <p>{notification.title}</p>
-                                    <p>{notification.message}</p>
+                                <div key={notification.id} className="px-4 md:px-8 lg:px-16 py-6 border-4 border-secondary rounded-lg shadow-lg font-medium text-gray-600 md:mt-8">
+                                    <div className="flex place-items-center space-x-4">
+                                        <img
+                                            alt={notification.source.name}
+                                            className="w-24 h-24 object-cover rounded-full align-middle border-none shadow-lg"
+                                            src={notification.source.image || `https://ui-avatars.com/api/?format=svg&background=0066CC&color=fff&name=${notification.source.name}`}
+                                        />
+                                        <div>
+                                            <p>@{notification.source.username}</p>
+                                            <h1 className="font-Sora font-bold text-xl text-secondary">{notification.source.name}</h1>
+                                            <p className="font-Sora font-light">{moment.getDateTime(parseInt(notification.createdAt))}</p>
+                                        </div>
+                                    </div>
+                                    <p className="font-Sora font-semibold text-2xl mt-4">{notification.title}</p>
+                                    <p className="mt-1">{notification.message}</p>
                                 </div>
                             ))}
                         </div>
                     )}
                 </div>
 
-                <div>
+                <div className="flex place-items-center justify-center mb-5">
                     <button
                         onClick={previousPage}
+                        disabled={!hasPrevious()}
+                        className="font-Sora tracking-wider bg-secondary text-white font-semibold py-2 px-4 rounded-sm mr-2 flex place-items-center space-x-3 disabled:bg-gray-300 disabled:cursor-not-allowed"
                     >
-                        Previous
+                        <IoArrowBackOutline />
+                        <div>Previous</div>
                     </button>
                     <button
                         onClick={nextPage}
+                        disabled={!hasNext()}
+                        className="font-Sora tracking-wider bg-secondary text-white font-semibold py-2 px-4 rounded-sm mr-2 flex place-items-center space-x-3 disabled:bg-gray-300 disabled:cursor-not-allowed"
                     >
-                        Next
+                        <div>Next</div>
+                        <IoArrowForwardOutline />
                     </button>
                 </div>
             </SideNavLayout>
