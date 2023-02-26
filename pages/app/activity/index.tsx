@@ -10,12 +10,12 @@ import type { NextPage } from "next";
 
 const Activity: NextPage = () => {
     const [notifications, setNotifications] = React.useState<any[]>([]);
-    const [pagination, setPagination] = React.useState({ next: "", limit: 5 });
+    const [pagination, setPagination] = React.useState({ next: "", limit: 2 });
 
     const [cursors, setCursors] = React.useState<string[]>([""]);
     const [cursorIndex, setCursorIndex] = React.useState<number>(0);
 
-    const { isLoading } = useGQLQuery(
+    const { isLoading, isFetching } = useGQLQuery(
         ["my-notifications", pagination.next],
         { query: notificationGetAllMine, variables: { pagination } },
         {
@@ -32,14 +32,14 @@ const Activity: NextPage = () => {
         }
     );
 
-    const hasNext = () => cursorIndex !== cursors.length - 1;
+    const hasNext = () => cursorIndex !== cursors.length - 1 && !isFetching && !isLoading;
     const nextPage = () => {
         if (!hasNext) return;
         setPagination({ ...pagination, next: cursors[cursorIndex + 1] });
         setCursorIndex((prev) => prev + 1);
     };
 
-    const hasPrevious = () => cursorIndex !== 0;
+    const hasPrevious = () => cursorIndex !== 0 && !isFetching && !isLoading;
     const previousPage = () => {
         if (!hasPrevious) return;
         setPagination({ ...pagination, next: cursors[cursorIndex - 1] });
@@ -70,46 +70,48 @@ const Activity: NextPage = () => {
                         </div>
                     )}
                     {notifications.length > 0 && (
-                        <div className="space-y-5">
-                            {notifications.map((notification) => (
-                                <div key={notification.id} className="px-4 md:px-8 lg:px-16 py-6 border-4 border-secondary rounded-lg shadow-lg font-medium text-gray-600 md:mt-8">
-                                    <div className="flex place-items-center space-x-4">
-                                        <img
-                                            alt={notification.source.name}
-                                            className="w-24 h-24 object-cover rounded-full align-middle border-none shadow-lg"
-                                            src={notification.source.image || `https://ui-avatars.com/api/?format=svg&background=0066CC&color=fff&name=${notification.source.name}`}
-                                        />
-                                        <div>
-                                            <p>@{notification.source.username}</p>
-                                            <h1 className="font-Sora font-bold text-xl text-secondary">{notification.source.name}</h1>
-                                            <p className="font-Sora font-light">{moment.getDateTime(parseInt(notification.createdAt))}</p>
+                        <>
+                            <div className="space-y-5">
+                                {notifications.map((notification) => (
+                                    <div key={notification.id} className="px-4 md:px-8 lg:px-16 py-6 border-4 border-secondary rounded-lg shadow-lg font-medium text-gray-600 md:mt-8">
+                                        <div className="flex place-items-center space-x-4">
+                                            <img
+                                                alt={notification.source.name}
+                                                className="w-24 h-24 object-cover rounded-full align-middle border-none shadow-lg"
+                                                src={notification.source.image || `https://ui-avatars.com/api/?format=svg&background=0066CC&color=fff&name=${notification.source.name}`}
+                                            />
+                                            <div>
+                                                <p>@{notification.source.username}</p>
+                                                <h1 className="font-Sora font-bold text-xl text-secondary">{notification.source.name}</h1>
+                                                <p className="font-Sora font-light">{moment.getDateTime(parseInt(notification.createdAt))}</p>
+                                            </div>
                                         </div>
+                                        <p className="font-Sora font-semibold text-2xl mt-4">{notification.title}</p>
+                                        <p className="mt-1">{notification.message}</p>
                                     </div>
-                                    <p className="font-Sora font-semibold text-2xl mt-4">{notification.title}</p>
-                                    <p className="mt-1">{notification.message}</p>
-                                </div>
-                            ))}
-                        </div>
-                    )}
-                </div>
+                                ))}
+                            </div>
 
-                <div className="flex place-items-center justify-center mb-5">
-                    <button
-                        onClick={previousPage}
-                        disabled={!hasPrevious()}
-                        className="font-Sora tracking-wider bg-secondary text-white font-semibold py-2 px-4 rounded-sm mr-2 flex place-items-center space-x-3 disabled:bg-gray-300 disabled:cursor-not-allowed"
-                    >
-                        <IoArrowBackOutline />
-                        <div>Previous</div>
-                    </button>
-                    <button
-                        onClick={nextPage}
-                        disabled={!hasNext()}
-                        className="font-Sora tracking-wider bg-secondary text-white font-semibold py-2 px-4 rounded-sm mr-2 flex place-items-center space-x-3 disabled:bg-gray-300 disabled:cursor-not-allowed"
-                    >
-                        <div>Next</div>
-                        <IoArrowForwardOutline />
-                    </button>
+                            <div className="flex place-items-center justify-center my-5">
+                                <button
+                                    onClick={previousPage}
+                                    disabled={!hasPrevious()}
+                                    className="font-Sora tracking-wider bg-secondary text-white font-semibold py-2 px-4 rounded-sm mr-2 flex place-items-center space-x-3 disabled:bg-gray-300 disabled:cursor-not-allowed"
+                                >
+                                    <IoArrowBackOutline />
+                                    <div>Previous</div>
+                                </button>
+                                <button
+                                    onClick={nextPage}
+                                    disabled={!hasNext()}
+                                    className="font-Sora tracking-wider bg-secondary text-white font-semibold py-2 px-4 rounded-sm mr-2 flex place-items-center space-x-3 disabled:bg-gray-300 disabled:cursor-not-allowed"
+                                >
+                                    <div>Next</div>
+                                    <IoArrowForwardOutline />
+                                </button>
+                            </div>
+                        </>
+                    )}
                 </div>
             </SideNavLayout>
         </>
