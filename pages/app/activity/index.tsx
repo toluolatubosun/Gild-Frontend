@@ -10,7 +10,7 @@ import type { NextPage } from "next";
 
 const Activity: NextPage = () => {
     const [notifications, setNotifications] = React.useState<any[]>([]);
-    const [pagination, setPagination] = React.useState({ next: "", limit: 2 });
+    const [pagination, setPagination] = React.useState({ next: "", limit: 5 });
 
     const [cursors, setCursors] = React.useState<string[]>([""]);
     const [cursorIndex, setCursorIndex] = React.useState<number>(0);
