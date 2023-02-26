@@ -2,13 +2,12 @@ import React from "react";
 import Link from "next/link";
 import Image from "next/image";
 import { useRouter } from "next/router";
-import { GrBriefcase } from "react-icons/gr";
 import { GiTakeMyMoney } from "react-icons/gi";
 import { FaTimes, FaBars } from "react-icons/fa";
-import { HiOutlineBanknotes } from "react-icons/hi2";
 import { MdOutlineDashboard } from "react-icons/md";
-import { BiUser, BiLogOut, BiBriefcaseAlt, BiCreditCard } from "react-icons/bi";
-import { AiOutlineBank } from "react-icons/ai";
+import { HiOutlineBanknotes } from "react-icons/hi2";
+import { BiUser, BiLogOut, BiCreditCard } from "react-icons/bi";
+import { AiOutlineBank, AiOutlineHistory } from "react-icons/ai";
 
 import { useUser } from "../../utils";
 import UserDropDown from "./DropDown/User-DropDown";
@@ -139,6 +138,20 @@ const SideNav = () => {
                             </li>
 
                             <li className="items-center cursor-pointer">
+                                <Link passHref href="/app/user">
+                                    <div
+                                        className={
+                                            "text-xl capitalize py-3 font-semibold tracking-wide flex flex-row space-x-2 items-center " +
+                                            (router.pathname == "/app/user" ? "text-secondary" : "text-gray-900 hover:text-secondary")
+                                        }
+                                    >
+                                        <BiUser />
+                                        <p>Profile</p>
+                                    </div>
+                                </Link>
+                            </li>
+
+                            <li className="items-center cursor-pointer">
                                 <Link passHref href="/app/cards">
                                     <div
                                         className={
@@ -153,15 +166,15 @@ const SideNav = () => {
                             </li>
 
                             <li className="items-center cursor-pointer">
-                                <Link passHref href="/app/user">
+                                <Link passHref href="/app/activity">
                                     <div
                                         className={
                                             "text-xl capitalize py-3 font-semibold tracking-wide flex flex-row space-x-2 items-center " +
-                                            (router.pathname == "/app/user" ? "text-secondary" : "text-gray-900 hover:text-secondary")
+                                            (router.pathname == "/app/activity" ? "text-secondary" : "text-gray-900 hover:text-secondary")
                                         }
                                     >
-                                        <BiUser />
-                                        <p>Profile</p>
+                                        <AiOutlineHistory />
+                                        <p>Activity</p>
                                     </div>
                                 </Link>
                             </li>

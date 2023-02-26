@@ -3,7 +3,7 @@ import Link from "next/link";
 import Head from "next/head";
 import { toast } from "react-toastify";
 import { useRouter } from "next/router";
-import { setCookies } from "cookies-next";
+import { setCookie } from "cookies-next";
 
 import { authLogin } from "../../api";
 import { CardLayout, InputField } from "../../components";
@@ -26,8 +26,8 @@ const Login: NextPage = () => {
         onSuccess: ({ response }: any) => {
             toast.dismiss();
 
-            setCookies("access_token", response.token.accessToken);
-            setCookies("refresh_token", response.token.refreshToken);
+            setCookie("access_token", response.token.accessToken);
+            setCookie("refresh_token", response.token.refreshToken);
 
             router.replace("/app");
         },
