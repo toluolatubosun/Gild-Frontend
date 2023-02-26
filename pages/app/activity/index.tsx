@@ -15,8 +15,6 @@ const Activity: NextPage = () => {
     const [cursors, setCursors] = React.useState<string[]>([""]);
     const [cursorIndex, setCursorIndex] = React.useState<number>(0);
 
-    console.log(cursors, cursorIndex);
-
     const { isLoading } = useGQLQuery(
         ["my-notifications", pagination.next],
         { query: notificationGetAllMine, variables: { pagination } },
