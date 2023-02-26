@@ -60,7 +60,7 @@ const Activity: NextPage = () => {
                 <div className="px-4 md:px-8 lg:px-16 py-12 bg-secondary rounded-lg shadow-lg text-center text-white md:mt-10">
                     <h1 className="font-Sora font-bold text-2xl md:text-3xl lg:text-4xl">Your Activity</h1>
 
-                    <p className="font-bold text-lg md:text-xl lg:text-2xl mt-5">See all you recent transactions in one place</p>
+                    <p className="font-bold text-lg md:text-xl lg:text-2xl mt-5">View your account history in one place</p>
                 </div>
 
                 <div className="my-5 md:mt-19">
