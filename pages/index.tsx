@@ -5,11 +5,11 @@ import { AiOutlineBank } from "react-icons/ai";
 import { GiTakeMyMoney } from "react-icons/gi";
 import { HiOutlineBanknotes } from "react-icons/hi2";
 
+import { Accordion } from "../components";
 import logo_trans from "../public/logo/logo_trans.png";
 import man_using_gild from "../public/images/man-using-gild.jpg";
 
 import type { NextPage } from "next";
-import { Accordion } from "../components";
 
 const Home: NextPage = () => {
     const steps = [
@@ -112,6 +112,16 @@ const Home: NextPage = () => {
                         ))}
                     </div>
                 </div>
+            </div>
+
+            {/* Contact Section */}
+            <div className="bg-secondary text-center py-16 text-white">
+                <h1 className="font-Sora font-bold tracking-wide text-2xl md:text-3xl lg:text-4xl">Reach out to us via Email</h1>
+                <p className="font-semibold mt-5 text-primary text-xl md:text-2xl lg:text-3xl">~ hello@trygild.com</p>
+            </div>
+
+            <div className="text-center py-3 bg-gray-800 text-secondary">
+                <p className="font-light font-Sora text-sm md:text-base">© {new Date().getFullYear()} GILD. All rights reserved</p>
             </div>
         </>
     );
