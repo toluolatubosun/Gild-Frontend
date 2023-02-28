@@ -21,7 +21,9 @@ function MyApp({ Component, pageProps }: AppProps) {
             <ToastContainer newestOnTop={true} pauseOnHover={false} autoClose={3000} />
 
             <QueryClientProvider client={queryClient}>
-                <Component {...pageProps} />
+                <div className="font-Poppins">
+                    <Component {...pageProps} />
+                </div>
 
                 <ReactQueryDevtools initialIsOpen={false} />
             </QueryClientProvider>

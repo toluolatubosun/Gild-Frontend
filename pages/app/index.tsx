@@ -2,8 +2,8 @@ import React from "react";
 import Head from "next/head";
 import Link from "next/link";
 import { AiOutlineBank } from "react-icons/ai";
-import { HiOutlineBanknotes } from "react-icons/hi2";
 import { GiTakeMyMoney } from "react-icons/gi";
+import { HiOutlineBanknotes } from "react-icons/hi2";
 
 import { walletGetMine } from "../../api";
 import { SideNavLayout } from "../../components";
