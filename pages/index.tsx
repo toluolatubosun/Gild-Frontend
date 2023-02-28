@@ -9,6 +9,7 @@ import logo_trans from "../public/logo/logo_trans.png";
 import man_using_gild from "../public/images/man-using-gild.jpg";
 
 import type { NextPage } from "next";
+import { Accordion } from "../components";
 
 const Home: NextPage = () => {
     const steps = [
@@ -30,6 +31,12 @@ const Home: NextPage = () => {
             description:
                 "Tokens can be withdrawn to a bank account, using a stripe express account. A stripe express account is a mini stripe account that allows us to collect the necessary information to facilitate withdrawal. Payouts are done in USD or converted to local currency using standard rates."
         }
+    ];
+
+    const faqs = [
+        { title: "What is GILD?", body: "GILD is a platform that allows you send money across boarders" },
+        { title: "What is GILD?", body: "GILD is a platform that allows you send money across boarders" },
+        { title: "What is GILD?", body: "GILD is a platform that allows you send money across boarders" }
     ];
 
     return (
@@ -78,6 +85,19 @@ const Home: NextPage = () => {
                                 <h1 className="font-Sora font-bold text-2xl mt-4">{step.title}</h1>
                                 <p className="text-lg mt-2 text-center">{step.description}</p>
                             </div>
+                        ))}
+                    </div>
+                </div>
+            </div>
+
+            {/* Frequently Asked Questions */}
+            <div className="flex items-center min-h-screen w-full bg-gray-100 text-secondary">
+                <div className="mx-10 md:mx-24 my-12 lg:my-0 w-full">
+                    <h1 className="font-Sora font-bold text-3xl md:text-4xl lg:text-5xl">Frequently Asked Questions</h1>
+
+                    <div className="w-full mt-10 lg:mt-16">
+                        {faqs.map((faq, index) => (
+                            <Accordion key={index} title={faq.title} body={faq.body} />
                         ))}
                     </div>
                 </div>
