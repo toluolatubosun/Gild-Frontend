@@ -120,7 +120,7 @@ const Home: NextPage = () => {
                 <p className="font-semibold mt-5 text-primary text-xl md:text-2xl lg:text-3xl">~ hello@trygild.com</p>
             </div>
 
-            <div className="text-center py-3 bg-gray-800 text-secondary">
+            <div className="text-center py-3 bg-primary text-black">
                 <p className="font-light font-Sora text-sm md:text-base">© {new Date().getFullYear()} GILD. All rights reserved</p>
             </div>
         </>
