@@ -166,10 +166,10 @@ const Withdraw: NextPage = () => {
                     </div>
 
                     <div className="px-4 md:px-8 lg:px-16 py-8 border-4 border-secondary rounded-lg shadow-lg text-center text-gray-700 md:mt-10">
-                        <h1 className="font-Sora font-bold text-xl md:text-2xl lg:text-3xl">Stripe Account</h1>
+                        <h1 className="font-Sora font-bold text-xl md:text-2xl lg:text-3xl">Stripe Express Account</h1>
                         <div className="cursor-pointer font-Sora font-bold text-lg md:text-xl lg:text-2xl mt-5 text-primary">
                             {stripeAccountStatus === "connected" && "Connected"}
-                            {stripeAccountStatus === "not_connected" && "Not Connected"}
+                            {stripeAccountStatus === "not_connected" && "Not Available"}
                             {stripeAccountStatus === "setup_incomplete" && "Setup Incomplete"}
                         </div>
                     </div>
@@ -181,9 +181,9 @@ const Withdraw: NextPage = () => {
                             disabled={isSettingUpExpressAccount || isLoggingToExpressAccount}
                             className="bg-secondary text-white font-Sora font-bold tracking-wide text-lg md:text-xl lg:text-2xl px-6 py-2 rounded-sm mt-5 disabled:cursor-not-allowed disabled:bg-gray-300"
                         >
-                            {stripeAccountStatus === "connected" && "Login to Stripe"}
+                            {stripeAccountStatus === "connected" && "Login"}
                             {stripeAccountStatus === "setup_incomplete" && "Continue Setup"}
-                            {stripeAccountStatus === "not_connected" && "Connected Stripe Account"}
+                            {stripeAccountStatus === "not_connected" && "Create Account"}
                         </button>
                     </div>
                 </div>

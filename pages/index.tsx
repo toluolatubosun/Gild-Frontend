@@ -34,9 +34,20 @@ const Home: NextPage = () => {
     ];
 
     const faqs = [
-        { title: "What is GILD?", body: "GILD is a platform that allows you send money across boarders" },
-        { title: "What is GILD?", body: "GILD is a platform that allows you send money across boarders" },
-        { title: "What is GILD?", body: "GILD is a platform that allows you send money across boarders" }
+        { title: "What are GILD tokens?", body: "GILD tokens are virtual tokens that are ALWAYS going to be equivalent to $1" },
+        { title: "How do I get GILD tokens?", body: "You can get GILD tokens by depositing fiat currency into your GILD wallet" },
+        { title: "What is the GILD exchange rate?", body: "1 GILD = $1" },
+        { title: "How long does it take to receive GILD tokens after depositing?", body: "GILD tokens are deposited instantly to your GILD wallet" },
+        { title: "What currencies can I use to deposit GILD tokens?", body: "You can deposit GILD tokens using: USD, EUR, NGN, INR, GBP, CAD" },
+        { title: "How do I send GILD tokens?", body: "You can send GILD tokens to any other GILD user using their email address or username" },
+        { title: "How long does it take to receive GILD tokens after sending?", body: "GILD tokens are sent instantly to the recipient" },
+        { title: "What countries support withdrawal?", body: "Withdrawals are currently supported in the US, UK and Canada" },
+        { title: "How do I withdraw GILD tokens?", body: "You can withdraw GILD tokens to a bank account, using a stripe express account" },
+        { title: "What is a stripe express account?", body: "A stripe express account is a mini stripe account that allows us to collect the necessary information to facilitate withdrawal" },
+        { title: "Do I need a stripe express account to withdraw?", body: "Yes, you need a stripe express account to withdraw" },
+        { title: "How do I create a stripe express account?", body: "You can create a stripe express account by clicking on the 'Create Account' button on the withdrawal page" },
+        { title: "What currency are withdrawal payouts made in?", body: "Payouts are done in your local currency using standard rates" },
+        { title: "How long does it take to withdraw GILD tokens?", body: "Withdrawals are done instantly to a stripe express account. Duration of payout to bank from stripe varies based on location" }
     ];
 
     return (
@@ -69,7 +80,7 @@ const Home: NextPage = () => {
 
             {/* How to use Section */}
             <div className="flex items-center min-h-screen w-full bg-secondary text-white">
-                <div className="mx-10 md:mx-24 my-12 lg:my-0 w-full">
+                <div className="mx-10 md:mx-24 my-12 w-full">
                     <h1 className="font-Sora font-bold text-3xl md:text-4xl lg:text-5xl">
                         <span className="text-primary">GILD</span> works in 3 easy steps
                     </h1>
@@ -92,7 +103,7 @@ const Home: NextPage = () => {
 
             {/* Frequently Asked Questions */}
             <div className="flex items-center min-h-screen w-full bg-gray-100 text-secondary">
-                <div className="mx-10 md:mx-24 my-12 lg:my-0 w-full">
+                <div className="mx-10 md:mx-24 my-16 w-full">
                     <h1 className="font-Sora font-bold text-3xl md:text-4xl lg:text-5xl">Frequently Asked Questions</h1>
 
                     <div className="w-full mt-10 lg:mt-16">
