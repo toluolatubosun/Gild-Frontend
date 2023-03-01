@@ -55,7 +55,7 @@ const Home: NextPage = () => {
             {/* Main Section */}
             <div className="flex items-center min-h-screen w-full bg-gray-50">
                 <div className="flex flex-col lg:flex-row justify-between items-center flex-wrap mx-10 md:mx-24 my-12 lg:my-0">
-                    <div className="flex flex-col items-center lg:items-start text-black">
+                    <div data-aos="fade-right" className="flex flex-col items-center lg:items-start text-black">
                         <div className="flex items-center justify-center lg:justify-start">
                             <div className="w-24 md:w-32 lg:w-40 cursor-pointer">
                                 <Image src={logo_trans} alt="logo" />
@@ -72,7 +72,7 @@ const Home: NextPage = () => {
                             </div>
                         </Link>
                     </div>
-                    <div className="w-1/2 md:w-2/3 lg:w-1/3 mt-8 lg:mt-0">
+                    <div data-aos="fade-left" className="w-1/2 md:w-2/3 lg:w-1/3 mt-8 lg:mt-0">
                         <Image className="rounded-xl" placeholder="blur" src={man_using_gild} alt="man_using_gild" />
                     </div>
                 </div>
@@ -81,13 +81,17 @@ const Home: NextPage = () => {
             {/* How to use Section */}
             <div className="flex items-center min-h-screen w-full bg-secondary text-white">
                 <div className="mx-10 md:mx-24 my-12 w-full">
-                    <h1 className="font-Sora font-bold text-3xl md:text-4xl lg:text-5xl">
+                    <h1 data-aos="fade-right" className="font-Sora font-bold text-3xl md:text-4xl lg:text-5xl">
                         <span className="text-primary">GILD</span> works in 3 easy steps
                     </h1>
 
                     <div className="grid grid-cols-1 lg:grid-cols-3 w-full mt-2 lg:mt-20 lg:space-x-8">
                         {steps.map((step, index) => (
-                            <div key={index} className="flex flex-col items-center mt-8 lg:mt-0 ring-4 ring-primary rounded-sm px-6 py-8">
+                            <div
+                                key={index}
+                                className="flex flex-col items-center mt-8 lg:mt-0 ring-4 ring-primary rounded-sm px-6 py-8"
+                                data-aos={(index === 0 && "zoom-in-right") || (index === 1 && "zoom-in-down") || (index === 2 && "zoom-in-left")}
+                            >
                                 <div className="flex items-center justify-center w-20 h-20 rounded-full bg-primary text-secondary">
                                     {step.icon === "HiOutlineBanknotes" && <HiOutlineBanknotes className="text-3xl" />}
                                     {step.icon === "GiTakeMyMoney" && <GiTakeMyMoney className="text-3xl" />}
@@ -104,11 +108,15 @@ const Home: NextPage = () => {
             {/* Frequently Asked Questions */}
             <div className="flex items-center min-h-screen w-full bg-gray-100 text-secondary">
                 <div className="mx-10 md:mx-24 my-16 w-full">
-                    <h1 className="font-Sora font-bold text-3xl md:text-4xl lg:text-5xl">Frequently Asked Questions</h1>
+                    <h1 data-aos="fade-left" className="font-Sora font-bold text-3xl md:text-4xl lg:text-5xl">
+                        Frequently Asked Questions
+                    </h1>
 
                     <div className="w-full mt-10 lg:mt-16">
                         {faqs.map((faq, index) => (
-                            <Accordion key={index} title={faq.title} body={faq.body} />
+                            <div data-aos="fade-right" className="w-full">
+                                <Accordion key={index} title={faq.title} body={faq.body} />
+                            </div>
                         ))}
                     </div>
                 </div>
@@ -116,8 +124,12 @@ const Home: NextPage = () => {
 
             {/* Contact Section */}
             <div className="bg-secondary text-center py-16 text-white">
-                <h1 className="font-Sora font-bold tracking-wide text-2xl md:text-3xl lg:text-4xl">Reach out to us via Email</h1>
-                <p className="font-semibold mt-5 text-primary text-xl md:text-2xl lg:text-3xl">~ hello@trygild.com</p>
+                <h1 data-aos="zoom-in-down" className="font-Sora font-bold tracking-wide text-2xl md:text-3xl lg:text-4xl">
+                    Reach out to us via Email
+                </h1>
+                <p data-aos="zoom-in-up" className="font-semibold mt-5 text-primary text-xl md:text-2xl lg:text-3xl">
+                    ~ hello@trygild.com
+                </p>
             </div>
 
             {/* Footer Section */}
