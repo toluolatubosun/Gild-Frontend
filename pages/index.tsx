@@ -114,8 +114,8 @@ const Home: NextPage = () => {
 
                     <div className="w-full mt-10 lg:mt-16">
                         {faqs.map((faq, index) => (
-                            <div data-aos="fade-right" className="w-full">
-                                <Accordion key={index} title={faq.title} body={faq.body} />
+                            <div key={index} data-aos="fade-right" className="w-full">
+                                <Accordion title={faq.title} body={faq.body} />
                             </div>
                         ))}
                     </div>
