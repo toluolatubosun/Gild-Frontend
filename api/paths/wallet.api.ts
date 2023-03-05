@@ -9,8 +9,8 @@ export const walletGetMine = gql`
 `;
 
 export const walletInitializeDeposit = gql`
-    mutation walletInitializeDeposit($amount: Int!, $currencyCode: String!) {
-        clientSecret: walletInitializeDeposit(amount: $amount, currencyCode: $currencyCode)
+    mutation walletInitializeDeposit($amount: Int!, $currencyCode: String!, $cardId: String) {
+        clientSecret: walletInitializeDeposit(amount: $amount, currencyCode: $currencyCode, cardId: $cardId)
     }
 `;
 
