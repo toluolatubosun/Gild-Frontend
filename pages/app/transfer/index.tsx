@@ -1,15 +1,15 @@
 import React from "react";
 import Head from "next/head";
+import ReactModal from "react-modal";
+import { toast } from "react-toastify";
+import { MdClose } from "react-icons/md";
+import { useQueryClient } from "@tanstack/react-query";
 
-import { handleGraphQLError, useGQLMutation, useGQLQuery, withAuth } from "../../../utils";
 import { InputField, SideNavLayout } from "../../../components";
+import { handleGraphQLError, useGQLMutation, useGQLQuery, withAuth } from "../../../utils";
+import { walletCompleteTransfer, walletGetMine, walletInitializeTransfer, walletResendTransferOTP } from "../../../api";
 
 import type { NextPage } from "next";
-import { MdClose } from "react-icons/md";
-import ReactModal from "react-modal";
-import { useQueryClient } from "@tanstack/react-query";
-import { walletCompleteTransfer, walletGetMine, walletInitializeTransfer } from "../../../api";
-import { toast } from "react-toastify";
 
 const Transfer: NextPage = () => {
     const queryClient = useQueryClient();
@@ -47,6 +47,16 @@ const Transfer: NextPage = () => {
         }
     });
 
+    const { mutate: resendTransferOTP, isLoading: isResendingTransferOTP } = useGQLMutation(walletResendTransferOTP, {
+        onSuccess: () => {
+            toast.dismiss();
+            toast.success("OTP resent");
+        },
+        onError: (error: GraphQLErrorResponse) => {
+            handleGraphQLError(error);
+        }
+    });
+
     const { mutate: completeTransfer, isLoading: isCompletingTransfer } = useGQLMutation(walletCompleteTransfer, {
         onMutate: () => {
             toast.loading("Sending OTP...", { autoClose: false });
@@ -65,16 +75,6 @@ const Transfer: NextPage = () => {
             handleGraphQLError(error);
         }
     });
-
-    const initializeTransferFormSubmitted = (e: React.FormEvent<HTMLFormElement>) => {
-        e.preventDefault();
-        initializeTransfer(transferData);
-    };
-
-    const completeTransferFormSubmitted = (e: React.FormEvent<HTMLFormElement>) => {
-        e.preventDefault();
-        completeTransfer({ ...transferData, OTP: transferOTP });
-    };
 
     const [modalIsOpen, setIsOpen] = React.useState(false);
     const openModal = () => setIsOpen(true);
@@ -130,7 +130,13 @@ const Transfer: NextPage = () => {
                     </div>
 
                     {!submittedTransfer && (
-                        <form className="space-y-4" onSubmit={initializeTransferFormSubmitted}>
+                        <form
+                            className="space-y-4"
+                            onSubmit={(e) => {
+                                e.preventDefault();
+                                initializeTransfer(transferData);
+                            }}
+                        >
                             <InputField
                                 type="text"
                                 required={true}
@@ -160,7 +166,14 @@ const Transfer: NextPage = () => {
                     )}
 
                     {submittedTransfer && (
-                        <form className="space-y-4" onSubmit={completeTransferFormSubmitted}>
+                        <form
+                            className="space-y-4"
+                            onSubmit={(e) => {
+                                e.preventDefault();
+                                completeTransfer({ ...transferData, OTP: transferOTP });
+                                setTransferOTP("");
+                            }}
+                        >
                             <InputField
                                 type="number"
                                 required={true}
@@ -173,11 +186,11 @@ const Transfer: NextPage = () => {
                             />
 
                             <button
-                                className="font-Sora font-bold text-primary"
-                                disabled={isInitializingTransfer}
+                                className="font-Sora font-bold tracking-wide text-primary disabled:text-gray-300 disabled:cursor-not-allowed"
+                                disabled={isResendingTransferOTP}
                                 onClick={(e) => {
                                     e.preventDefault();
-                                    initializeTransfer(transferData);
+                                    resendTransferOTP(transferData);
                                 }}
                             >
                                 Resend OTP

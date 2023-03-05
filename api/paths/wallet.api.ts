@@ -20,6 +20,12 @@ export const walletInitializeWithdrawal = gql`
     }
 `;
 
+export const walletResendWithdrawalOTP = gql`
+    mutation walletResendWithdrawalOTP($amount: Int!) {
+        success: walletResendWithdrawalOTP(amount: $amount)
+    }
+`;
+
 export const walletCompleteWithdrawal = gql`
     mutation walletCompleteWithdrawal($amount: Int!, $OTP: String!) {
         success: walletCompleteWithdrawal(amount: $amount, OTP: $OTP)
@@ -29,6 +35,12 @@ export const walletCompleteWithdrawal = gql`
 export const walletInitializeTransfer = gql`
     mutation walletInitializeTransfer($receiverId: String!, $amount: Int!) {
         success: walletInitializeTransfer(receiverId: $receiverId, amount: $amount)
+    }
+`;
+
+export const walletResendTransferOTP = gql`
+    mutation walletResendTransferOTP($receiverId: String!, $amount: Int!) {
+        success: walletResendTransferOTP(receiverId: $receiverId, amount: $amount)
     }
 `;
 

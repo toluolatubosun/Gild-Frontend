@@ -7,7 +7,15 @@ import { useQueryClient } from "@tanstack/react-query";
 
 import { InputField, SideNavLayout } from "../../../components";
 import { handleGraphQLError, useGQLMutation, useGQLQuery, withAuth } from "../../../utils";
-import { stripeLoginToExpressAccount, stripeSetupExpressAccount, userGetMyStripeAccountStatus, walletCompleteWithdrawal, walletGetMine, walletInitializeWithdrawal } from "../../../api";
+import {
+    walletGetMine,
+    walletCompleteWithdrawal,
+    walletResendWithdrawalOTP,
+    walletInitializeWithdrawal,
+    stripeSetupExpressAccount,
+    stripeLoginToExpressAccount,
+    userGetMyStripeAccountStatus
+} from "../../../api";
 
 import type { NextPage } from "next";
 
@@ -87,6 +95,16 @@ const Withdraw: NextPage = () => {
         }
     });
 
+    const { mutate: resendTransferOTP, isLoading: isResendingTransferOTP } = useGQLMutation(walletResendWithdrawalOTP, {
+        onSuccess: () => {
+            toast.dismiss();
+            toast.success("OTP resent");
+        },
+        onError: (error: GraphQLErrorResponse) => {
+            handleGraphQLError(error);
+        }
+    });
+
     const { mutate: completeWithdrawal, isLoading: isCompletingWithdrawal } = useGQLMutation(walletCompleteWithdrawal, {
         onMutate: () => {
             toast.loading("Loading... Please wait", { autoClose: false });
@@ -105,16 +123,6 @@ const Withdraw: NextPage = () => {
             handleGraphQLError(error);
         }
     });
-
-    const initializeWithdrawalFormSubmitted = (e: React.FormEvent<HTMLFormElement>) => {
-        e.preventDefault();
-        initializeWithdrawal({ amount: withdrawalAmount });
-    };
-
-    const completeWithdrawalFormSubmitted = (e: React.FormEvent<HTMLFormElement>) => {
-        e.preventDefault();
-        completeWithdrawal({ amount: withdrawalAmount, OTP: withdrawalOTP });
-    };
 
     const manageStripeAccount = (status: string) => {
         if (status === "setup_incomplete" || status === "not_connected") {
@@ -204,7 +212,12 @@ const Withdraw: NextPage = () => {
                     </div>
 
                     {!submittedWithdrawal && (
-                        <form onSubmit={initializeWithdrawalFormSubmitted}>
+                        <form
+                            onSubmit={(e) => {
+                                e.preventDefault();
+                                initializeWithdrawal({ amount: withdrawalAmount });
+                            }}
+                        >
                             <InputField
                                 type="number"
                                 required={true}
@@ -227,7 +240,13 @@ const Withdraw: NextPage = () => {
                     )}
 
                     {submittedWithdrawal && (
-                        <form onSubmit={completeWithdrawalFormSubmitted}>
+                        <form
+                            className="space-y-4"
+                            onSubmit={(e) => {
+                                e.preventDefault();
+                                completeWithdrawal({ amount: withdrawalAmount, OTP: withdrawalOTP });
+                            }}
+                        >
                             <InputField
                                 type="number"
                                 required={true}
@@ -240,11 +259,11 @@ const Withdraw: NextPage = () => {
                             />
 
                             <button
-                                className="font-Sora font-bold text-primary my-2"
-                                disabled={isInitializingWithdrawal}
+                                className="font-Sora font-bold tracking-wide text-primary disabled:text-gray-300 disabled:cursor-not-allowed"
+                                disabled={isResendingTransferOTP}
                                 onClick={(e) => {
                                     e.preventDefault();
-                                    initializeWithdrawal({ amount: withdrawalAmount });
+                                    resendTransferOTP({ amount: withdrawalAmount });
                                 }}
                             >
                                 Resend OTP
