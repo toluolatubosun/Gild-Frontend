@@ -41,7 +41,7 @@ const Home: NextPage = () => {
         { title: "What currencies can I use to deposit GILD tokens?", body: "You can deposit GILD tokens using: USD, EUR, NGN, INR, GBP, CAD" },
         { title: "How do I send GILD tokens?", body: "You can send GILD tokens to any other GILD user using their email address or username" },
         { title: "How long does it take to receive GILD tokens after sending?", body: "GILD tokens are sent instantly to the recipient" },
-        { title: "What countries support withdrawal?", body: "Withdrawals are currently supported in the US, UK and Canada" },
+        { title: "What countries support withdrawal?", body: "Withdrawals are currently supported in the US, UK, Canada, Nigeria, and India" },
         { title: "How do I withdraw GILD tokens?", body: "You can withdraw GILD tokens to a bank account, using a stripe express account" },
         { title: "What is a stripe express account?", body: "A stripe express account is a mini stripe account that allows us to collect the necessary information to facilitate withdrawal" },
         { title: "Do I need a stripe express account to withdraw?", body: "Yes, you need a stripe express account to withdraw" },
