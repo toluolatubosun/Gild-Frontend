@@ -105,6 +105,7 @@ const Deposit: NextPage = () => {
                         Deposit
                     </button>
                 </div>
+
                 {Boolean(process.env.TEST_MODE) === true && (
                     <div className="bg-primary/70 px-6 py-3 rounded mt-4">
                         <div className="flex items-start space-x-2">
