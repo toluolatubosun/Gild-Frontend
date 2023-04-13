@@ -2,6 +2,7 @@
 const nextConfig = {
     reactStrictMode: true,
     env: {
+        TEST_MODE: process.env.TEST_MODE || true,
         GOOGLE_CLIENT_ID: process.env.GOOGLE_CLIENT_ID || "",
         STRIPE_PUBLIC_KEY: process.env.STRIPE_PUBLIC_KEY || "",
         BASE_URL: process.env.BASE_URL || "http://localhost:3000",

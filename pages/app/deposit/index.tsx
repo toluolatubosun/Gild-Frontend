@@ -1,6 +1,7 @@
 import React from "react";
 import Head from "next/head";
 import ReactModal from "react-modal";
+import { IoCopy } from "react-icons/io5";
 import { MdClose } from "react-icons/md";
 import { loadStripe } from "@stripe/stripe-js";
 import { Elements } from "@stripe/react-stripe-js";
@@ -10,6 +11,7 @@ import { handleGraphQLError, useGQLMutation, useGQLQuery, withAuth } from "../..
 import { InputField, Loading, SelectField, SideNavLayout, StripeCheckoutForm } from "../../../components";
 
 import type { NextPage } from "next";
+import { toast } from "react-toastify";
 
 const stripePromise = loadStripe(process.env.STRIPE_PUBLIC_KEY as any);
 
@@ -103,6 +105,26 @@ const Deposit: NextPage = () => {
                         Deposit
                     </button>
                 </div>
+                {Boolean(process.env.TEST_MODE) === true && (
+                    <div className="bg-primary/70 px-6 py-3 rounded mt-4">
+                        <div className="flex items-start space-x-2">
+                            <p>
+                                Test Card: <span className="font-semibold">4000000000000077</span>
+                            </p>
+                            <button
+                                onClick={() => {
+                                    navigator.clipboard.writeText("4000000000000077");
+                                    toast.info("Copied to clipboard");
+                                }}
+                            >
+                                <IoCopy className="text-xl font-light" />
+                            </button>
+                        </div>
+                        <p>
+                            You can make use of any <span className="font-semibold">MM/YY</span> and <span className="font-semibold">CVC</span>
+                        </p>
+                    </div>
+                )}
             </SideNavLayout>
 
             <ReactModal
