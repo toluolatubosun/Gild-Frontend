@@ -6,7 +6,7 @@ import { useRouter } from "next/router";
 import { setCookie } from "cookies-next";
 
 import { authLogin } from "../../api";
-import { CardLayout, InputField } from "../../components";
+import { CardLayout, InputField, GoogleLoginButton } from "../../components";
 import { handleGraphQLError, useGQLMutation, withoutAuth } from "../../utils";
 
 import type { NextPage } from "next";
@@ -49,6 +49,14 @@ const Login: NextPage = () => {
 
             <CardLayout>
                 <h1 className="font-Sora font-bold text-2xl text-center text-secondary mb-4 tracking-wide">Login To Your Account</h1>
+
+                <GoogleLoginButton />
+
+                <div className="flex flex-row items-center space-x-4 justify-center text-gray-700 mt-6 mb-4 break-normal">
+                    <hr className="basis-1/2" />
+                    <div className="font-WorkSans">OR</div>
+                    <hr className="basis-1/2" />
+                </div>
 
                 <form id="loginForm" className="mb-0 space-y-6" method="POST" onSubmit={HandleSubmit}>
                     <InputField

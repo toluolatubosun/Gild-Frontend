@@ -42,6 +42,20 @@ export const authLogin = gql`
     }
 `;
 
+export const authLoginWithGoogle = gql`
+    mutation authLoginWithGoogle($token: String!) {
+        response: authLoginWithGoogle(token: $token) {
+            user {
+                email
+            }
+            token {
+                accessToken
+                refreshToken
+            }
+        }
+    }
+`;
+
 export const authVerifyEmail = gql`
     mutation authVerifyEmail($userId: ID!, $verifyToken: String!) {
         success: authVerifyEmail(userId: $userId, verifyToken: $verifyToken)

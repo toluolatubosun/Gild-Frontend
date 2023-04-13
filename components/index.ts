@@ -13,3 +13,5 @@ export { default as StripeAddCardForm } from "./Stripe/Add-Card-Form";
 export { default as StripeCheckoutForm } from "./Stripe/Checkout-Form";
 
 export { default as Accordion } from "./Accordion/Accordion";
+
+export { default as GoogleLoginButton } from "./Google/Google-Login-Button";
