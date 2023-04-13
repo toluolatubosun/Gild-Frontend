@@ -1,6 +1,7 @@
 import React from "react";
 import Head from "next/head";
 import ReactModal from "react-modal";
+import { toast } from "react-toastify";
 import { IoCopy } from "react-icons/io5";
 import { MdClose } from "react-icons/md";
 import { loadStripe } from "@stripe/stripe-js";
@@ -11,7 +12,6 @@ import { handleGraphQLError, useGQLMutation, useGQLQuery, withAuth } from "../..
 import { InputField, Loading, SelectField, SideNavLayout, StripeCheckoutForm } from "../../../components";
 
 import type { NextPage } from "next";
-import { toast } from "react-toastify";
 
 const stripePromise = loadStripe(process.env.STRIPE_PUBLIC_KEY as any);
 
