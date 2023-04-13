@@ -50,7 +50,7 @@ const Login: NextPage = () => {
             <CardLayout>
                 <h1 className="font-Sora font-bold text-2xl text-center text-secondary mb-4 tracking-wide">Login To Your Account</h1>
 
-                <GoogleLoginButton />
+                <GoogleLoginButton clientId={process.env.GOOGLE_CLIENT_ID as string} />
 
                 <div className="flex flex-row items-center space-x-4 justify-center text-gray-700 mt-6 mb-4 break-normal">
                     <hr className="basis-1/2" />

@@ -12,7 +12,7 @@ declare global {
     }
 }
 
-const GoogleLogin = () => {
+const GoogleLogin = ({ clientId }: { clientId: string }) => {
     const router = useRouter();
     // Hook
     const { mutate } = useGQLMutation(authLoginWithGoogle, {
@@ -67,7 +67,7 @@ const GoogleLogin = () => {
             <div ref={scriptRef}></div>
 
             {/* Configuration */}
-            <div id="g_id_onload" data-client_id={process.env.GOOGLE_CLIENT_ID} data-text="Continue with google" data-auto_prompt="false" data-callback="GoogleAuthSuccess"></div>
+            <div id="g_id_onload" data-client_id={clientId} data-text="Continue with google" data-auto_prompt="false" data-callback="GoogleAuthSuccess"></div>
 
             {/* Render Button */}
             <div className="flex flex-col items-center">
