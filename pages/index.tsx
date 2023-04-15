@@ -128,7 +128,7 @@ const Home: NextPage = () => {
                     Reach out to us via Email
                 </h1>
                 <p data-aos="zoom-in-up" className="font-semibold mt-5 text-primary text-xl md:text-2xl lg:text-3xl">
-                    ~ hello@trygild.com
+                    ~ hello@usegild.com
                 </p>
             </div>
 
