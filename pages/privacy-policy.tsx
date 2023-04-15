@@ -162,13 +162,11 @@ const PrivacyPolicy: NextPage = () => {
                     <p className="text-md text-gray-700 my-3">For any questions or concerns regarding your privacy, you may contact us using the following details: </p>
                     <p className="text-md text-gray-700 my-3">
                         Gild
-                       
                         <br />
                         tolu@usegild.com
                     </p>
                 </div>
             </div>
-
         </>
     );
 };

@@ -135,6 +135,10 @@ const Home: NextPage = () => {
             {/* Footer Section */}
             <div className="text-center py-3 bg-primary text-black">
                 <p className="font-light font-Sora text-sm md:text-base">© {new Date().getFullYear()} GILD. All rights reserved</p>
+
+                <Link href="/privacy-policy">
+                    <p className="font-light font-Sora text-sm md:text-base cursor-pointer">Privacy Policy</p>
+                </Link>
             </div>
         </>
     );
