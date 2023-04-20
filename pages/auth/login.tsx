@@ -29,7 +29,11 @@ const Login: NextPage = () => {
             setCookie("access_token", response.token.accessToken);
             setCookie("refresh_token", response.token.refreshToken);
 
-            router.replace("/app");
+            if (response.user.role === "admin") {
+                router.replace("/admin");
+            } else {
+                router.replace("/app");
+            }
         },
         onError: (error: GraphQLErrorResponse) => {
             handleGraphQLError(error);

@@ -4,6 +4,7 @@ export const userGetMe = gql`
     query {
         me {
             name
+            role
             username
         }
     }

@@ -32,6 +32,7 @@ export const authLogin = gql`
     mutation authLogin($input: LoginInput!) {
         response: authLogin(input: $input) {
             user {
+                role
                 email
             }
             token {
@@ -46,6 +47,7 @@ export const authLoginWithGoogle = gql`
     mutation authLoginWithGoogle($token: String!) {
         response: authLoginWithGoogle(token: $token) {
             user {
+                role
                 email
             }
             token {
