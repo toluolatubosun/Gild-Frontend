@@ -44,3 +44,41 @@ export const userUpdateMe = gql`
         }
     }
 `;
+
+export const userCreate = gql`
+    mutation userCreate($input: UserDataInput!) {
+        user: userCreate(input: $input) {
+            id
+        }
+    }
+`;
+
+export const userGetAll = gql`
+    query users($pagination: PaginationInput!) {
+        data: users(pagination: $pagination) {
+            users {
+                id
+                name
+                role
+                email
+                isActive
+                wallet {
+                    balance
+                }
+            }
+            pagination {
+                total
+                next
+                hasNext
+            }
+        }
+    }
+`;
+
+export const userUpdate = gql`
+    mutation userUpdate($userId: ID!, $input: UserDataInput!) {
+        data: userUpdate(userId: $userId, input: $input) {
+            id
+        }
+    }
+`;

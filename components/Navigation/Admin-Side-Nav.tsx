@@ -8,13 +8,10 @@ import { FaTimes, FaBars } from "react-icons/fa";
 import { MdOutlineDashboard, MdOutlineLoop } from "react-icons/md";
 import { AiOutlineUserAdd, AiOutlineSetting } from "react-icons/ai";
 
-import { useUser } from "../../utils";
 import UserDropDown from "./DropDown/User-DropDown";
 import logo_trans from "../../public/logo/logo_trans.png";
 
-const AdminSideNav = () => {
-    const { user } = useUser();
-
+const AdminSideNav = ({ user }: any) => {
     const [collapseShow, setCollapseShow] = React.useState("hidden");
     const router = useRouter();
 

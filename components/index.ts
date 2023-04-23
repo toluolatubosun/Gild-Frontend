@@ -15,3 +15,5 @@ export { default as StripeCheckoutForm } from "./Stripe/Checkout-Form";
 export { default as Accordion } from "./Accordion/Accordion";
 
 export { default as GoogleLoginButton } from "./Google/Google-Login-Button";
+
+export { default as UsersTable } from "./Table/Users-Table";

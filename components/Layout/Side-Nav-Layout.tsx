@@ -22,7 +22,7 @@ const SideNavLayout = ({ children, isLoading, isAdmin = false }: dashboardLayout
 
     return (
         <>
-            {isAdmin ? <AdminSideNav /> : <SideNav />}
+            {isAdmin ? <AdminSideNav user={user} /> : <SideNav user={user} />}
 
             <div className="relative md:ml-64">
                 <div className="flex flex-col h-screen">

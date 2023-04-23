@@ -9,13 +9,10 @@ import { HiOutlineBanknotes } from "react-icons/hi2";
 import { BiUser, BiLogOut, BiCreditCard } from "react-icons/bi";
 import { AiOutlineBank, AiOutlineHistory } from "react-icons/ai";
 
-import { useUser } from "../../utils";
 import UserDropDown from "./DropDown/User-DropDown";
 import logo_trans from "../../public/logo/logo_trans.png";
 
-const SideNav = () => {
-    const { user } = useUser();
-
+const SideNav = ({ user }: any) => {
     const [collapseShow, setCollapseShow] = React.useState("hidden");
     const router = useRouter();
 

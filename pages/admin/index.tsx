@@ -1,13 +1,11 @@
 import React from "react";
 import Head from "next/head";
 import Link from "next/link";
-import { AiOutlineBank, AiOutlineSetting, AiOutlineUserAdd } from "react-icons/ai";
 import { GiTakeMyMoney } from "react-icons/gi";
-import { HiOutlineBanknotes } from "react-icons/hi2";
+import { AiOutlineSetting, AiOutlineUserAdd } from "react-icons/ai";
 
-import { walletGetMine } from "../../api";
+import { useUser, withAuth } from "../../utils";
 import { SideNavLayout } from "../../components";
-import { handleGraphQLError, useGQLQuery, useUser, withAuth } from "../../utils";
 
 import type { NextPage } from "next";
 
