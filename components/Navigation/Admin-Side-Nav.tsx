@@ -124,7 +124,7 @@ const AdminSideNav = ({ user }: any) => {
                                     <div
                                         className={
                                             "text-xl capitalize py-3 font-semibold tracking-wide flex flex-row space-x-2 items-center " +
-                                            (router.pathname == "/app/system-settings" ? "text-secondary" : "text-gray-900 hover:text-secondary")
+                                            (router.pathname == "/admin/system-settings" ? "text-secondary" : "text-gray-900 hover:text-secondary")
                                         }
                                     >
                                         <AiOutlineSetting />

@@ -12,4 +12,5 @@ export * from "./paths/wallet.api";
 export * from "./paths/stripe.api";
 export * from "./paths/business.api";
 export * from "./paths/currency.api";
+export * from "./paths/settings.api";
 export * from "./paths/notification.api";
