@@ -50,7 +50,7 @@ const Transactions: NextPage = () => {
 
                 <br />
 
-                <div className="relative overflow-x-auto shadow-md sm:rounded-lg mt-4">
+                <div className="relative overflow-x-auto shadow-md sm:rounded-lg mt-4 mb-9">
                     <table className="w-full text-sm text-left text-gray-500 dark:text-gray-400">
                         <thead className="font-Sora text-base text-white tracking-wider capitalize bg-primary">
                             <tr>
