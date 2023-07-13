@@ -45,7 +45,7 @@ const Transactions: NextPage = () => {
                     <h1 className="font-Sora font-bold text-2xl md:text-3xl lg:text-4xl">
                         Overview of <span className="text-primary">Gild</span> Transaction
                     </h1>
-                    <p className="font-bold text-lg md:text-xl lg:text-2xl mt-5">Monitor the volume of user's actions on the platform</p>
+                    <p className="font-bold text-lg md:text-xl lg:text-2xl mt-5">Monitor the volume of user&apos;s actions on the platform</p>
                 </div>
 
                 <br />
