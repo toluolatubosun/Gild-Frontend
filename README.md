@@ -1,5 +1,8 @@
-# Nextjs Tailwind GraphQL Starter
+# Gild
 
-This is built with NextJS, Typescript and TailwindCSS
+## About
 
-It makes use of React Query and GraphQL Request to make GraphQL API calls.
+My B.Sc. Computer Science, Final Year Project 
+
+Live Demo: https://usegild.com/
+Backend Repo: https://github.com/toluolatubosun/Gild-Backend

@@ -13,6 +13,10 @@ function MyApp({ Component, pageProps }: any) {
     React.useEffect(() => {
         AOS.init({ duration: 1500 });
         AOS.refresh();
+
+        // ping server to start it up
+        fetch(process.env.BACKEND_BASE_URL as string)
+        .catch((err) => console.log(err));
     }, []);
 
     return (
@@ -26,6 +30,11 @@ function MyApp({ Component, pageProps }: any) {
 
             <QueryClientProvider client={queryClient}>
                 <div className="font-Poppins break-words overflow-x-clip">
+                {Boolean(process.env.TEST_MODE) === true && (
+                    <div className="fixed bottom-0 right-0 z-50 p-2 text-sm text-white bg-primary rounded-tl-md border-l-2 border-t-2 border-secondary">
+                        <span className="font-bold text-secondary">TEST MODE</span>
+                    </div>
+                )}
                     <Component {...pageProps} />
                 </div>
 

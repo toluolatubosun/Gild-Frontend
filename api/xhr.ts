@@ -65,7 +65,7 @@ const requestMiddleware = async (request: RequestInit) => {
     };
 };
 
-const baseURL = process.env.BACKEND_BASE_URL as string;
+const baseURL = process.env.BACKEND_GRAPHQL_URL as string;
 
 const options = {
     requestMiddleware
