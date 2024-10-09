@@ -64,6 +64,7 @@ const Deposit: NextPage = () => {
             setClientSecret(clientSecret);
         },
         onError: (error: GraphQLErrorResponse) => {
+            setSubmittedDeposit(false);
             handleGraphQLError(error);
         }
     });
@@ -76,7 +77,12 @@ const Deposit: NextPage = () => {
 
     const [modalIsOpen, setIsOpen] = React.useState(false);
     const openModal = () => setIsOpen(true);
-    const closeModal = () => setIsOpen(false);
+    const closeModal = () => {
+        setIsOpen(false);
+        setAmount(0);
+        setSelectedCurrency("");
+        setSubmittedDeposit(false);
+    }
 
     return (
         <>

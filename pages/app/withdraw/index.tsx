@@ -136,7 +136,12 @@ const Withdraw: NextPage = () => {
 
     const [modalIsOpen, setIsOpen] = React.useState(false);
     const openModal = () => setIsOpen(true);
-    const closeModal = () => setIsOpen(false);
+    const closeModal = () => {
+        setIsOpen(false);
+        setWithdrawalOTP("");
+        setWithdrawalAmount(0);
+        setSubmittedWithdrawal(false);
+    }
 
     return (
         <>

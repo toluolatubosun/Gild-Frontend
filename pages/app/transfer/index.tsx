@@ -78,7 +78,12 @@ const Transfer: NextPage = () => {
 
     const [modalIsOpen, setIsOpen] = React.useState(false);
     const openModal = () => setIsOpen(true);
-    const closeModal = () => setIsOpen(false);
+    const closeModal = () => {
+        setIsOpen(false);
+        setTransferOTP("");
+        setSubmittedTransfer(false);
+        setTransferData({ amount: 0, receiverId: "" });
+    }
 
     return (
         <>
